@@ -83,9 +83,10 @@ class MiniMaxComputer
 			end
 		end
 		tree(board,level,false,level)
+
+
+
 		best_computer(board)
-		
-		print @possible
 		reset
 		if (special_cases(board,level) != -1)
 			return special_cases(board,level)
@@ -206,10 +207,10 @@ class MiniMaxComputer
 
 	
 
-	def possibilities
+	def possible_wins
 
-		possibilities = Array.new
-		possibilities = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6] ]
+		possible_wins = Array.new
+		possible_wins = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6] ]
 	end
 
 
@@ -218,7 +219,7 @@ class MiniMaxComputer
 
 	def player_victory(board)
 		
-		for possible in possibilities
+		for possible in possible_wins
 			if ((board[possible[0]].eql?(board[possible[1]])) && (board[possible[0]].eql?(board[possible[2]])) && board[possible[0]] != nil && board[possible[0]] == 'X' )
 				return true
 			end
@@ -232,7 +233,7 @@ class MiniMaxComputer
 
 
 	def computer_victory(board)
-		for possible in possibilities
+		for possible in possible_wins
 			if ((board[possible[0]].eql?(board[possible[1]])) && (board[possible[0]].eql?(board[possible[2]])) && board[possible[0]] != nil && board[possible[0]] == 'O' )
 				return true
 			end

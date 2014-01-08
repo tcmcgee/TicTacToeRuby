@@ -3,15 +3,11 @@ require_relative "Computer"
 class Game
 	attr_reader :tictactoe
 
-
-	#View Class, displays basically everything
-
-
 	def initialize(tictactoe, computer)
 		@tictactoe = tictactoe
 		@computer = computer
 		@turn = false
-		#game
+
 	end
 
 	def start
@@ -26,7 +22,7 @@ class Game
 		return_string = return_string + display_board + "\n"
 		@tictactoe.set_board(Array.new(9,nil))
 
-		#print return_string
+		
 		return return_string
 	end
 
@@ -80,10 +76,6 @@ class Game
 	def pick_first
 
 		done = false
-		#if (@computer.instance_of? MiniMaxComputer)
-		#	done = true
-		#	set_turn(false)
-		#end
 
 		while (!done)
 			print "\nWho will go first?"
@@ -130,7 +122,6 @@ class Game
 			print display_board
 			winner
 			while (!done)
-				#print choice
 				print "\n Would you like to play again?\n 1. Yes \n 2. No \n"
 				choice = gets.chomp.to_i
 		
@@ -177,7 +168,6 @@ class Game
 		return return_string
 	end
 
-	##game = Game.new(TicTacToe.new,Computer.new)
 
 end
 

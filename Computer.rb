@@ -18,7 +18,7 @@ class Computer
 		return num + 1
 	end
 
-	def CheckForTwo(value,board)
+	def check_for_two(value,board)
 		possibilities = Array.new
 		possibilities = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6] ]
 		for possible in possibilities
@@ -73,10 +73,10 @@ end
 
 
 def Turn(board)
-	if (CheckForTwo('O',board) != -1)
-		return CheckForTwo('O',board)
-	elsif (CheckForTwo('X',board) != -1)
-		return CheckForTwo('X',board)
+	if (check_for_two('O',board) != -1)
+		return check_for_two('O',board)
+	elsif (check_for_two('X',board) != -1)
+		return check_for_two('X',board)
 	elsif (middle(board) != -1)
 		return middle(board)
 	elsif (random_corner(board) != -1)

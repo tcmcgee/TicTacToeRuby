@@ -34,10 +34,12 @@ describe MiniMaxComputer do
 	it "should block an immediate loss over a  future win" do
 
 		board = ['X','X',nil,
-				nil,'O',nil,
+				nil,nil,nil,
 				nil,'O',nil]
 		expect(computer.Turn(board)).to eq(3)
 	end
+
+	
 
 
 end
