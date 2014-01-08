@@ -77,10 +77,10 @@ def Turn(board)
 		return CheckForTwo('O',board)
 	elsif (CheckForTwo('X',board) != -1)
 		return CheckForTwo('X',board)
-	elsif (random_corner(board) != -1)
-		return random_corner(board)
 	elsif (middle(board) != -1)
 		return middle(board)
+	elsif (random_corner(board) != -1)
+		return random_corner(board)
 	else
 		return random_move(board)
 	end

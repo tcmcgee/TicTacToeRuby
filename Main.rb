@@ -5,6 +5,7 @@ require_relative "MiniMaxComputer"
 
 
 puts "Please pick your computers difficulty!\n"
+
 print "1. Easy\n"
 print "2. Hard\n"
 valid = false

@@ -1,4 +1,5 @@
 class MiniMaxComputer
+	#IMPORTANT NOTE: Very contrary to class name does not actually use Minimax algorithim 
 
 
 
@@ -7,10 +8,8 @@ class MiniMaxComputer
 
 
 		@lowest = 1000000000
-		@highest = -10000000000
 
 		@lowest_index = -1
-		@highest_index = -1
 	end
 
 
@@ -24,44 +23,30 @@ class MiniMaxComputer
 		if board[9] != nil
 			index = board[9]
 
-			
-			if (computer_victory(board))
-				@possible[index] = @possible[index] - (2  * (level + (10 * turn_level))) 
-
-				
-			end
-			
 			if  (player_victory(board))
 
-				@possible[index] = @possible[index] + (2 * (level +(10 * turn_level)))
+				@possible[index] = @possible[index] + (1 * ( level * 100 + turn_level))
 			
 			end
 
-			#	@possible[board[9]] = @possible[board[9]] - (100)
-				
-
-			#end
 		end
 
 		for i in (0...9)
 			if (board[i] != nil)
 
-
-				
-			#elsif (level == 0 && player_victory(board) == false)
-			#	@possible[board[9]] = @possible[board[9]] - 1
-
-
 			elsif (player_victory(board) || computer_victory(board) || level == 0)
 
 
 			else
+				#The 10th element in the array is the first move made, that way when the board is finished it can add or subtract to the proper index in @possible 
 				new_board = Array.new(10,nil)
 				if board.length == 9
 					for j in (0...9)
 						new_board[j] = board[j]
 						if board[j] != nil
 							@possible[j] = @possible[j] + 1000000
+					
+
 					
 						
  						end
@@ -98,45 +83,106 @@ class MiniMaxComputer
 			end
 		end
 		tree(board,level,false,level)
-		print @possible
-		print @possible_divider
-
-		print @possible
-		best(board)
+		best_computer(board)
 		
+		print @possible
 		reset
-		
+		if (special_cases(board,level) != -1)
+			return special_cases(board,level)
+		end
 
+		
+		
 		return @lowest_index + 1
+		
 
 
 		
 	end
 
+	def urgent_move(board)
+
+				for i in (0...9) 
+			if (board[i] == nil)
+				board[i] = 'O'
+				if (computer_victory(board) == true)
+					board[i] = nil
+					return (i + 1)
+				else
+					board[i] = nil
+				end
+			end
+		end
+		for i in (0...9) 
+			if (board[i] == nil)
+				board[i] = 'X'
+				if (player_victory(board) == true)
+					board[i] = nil
+					return (i + 1)
+				else
+					board[i] = nil
+				end
+			end
+		end
+		return -1
+
+	end
+
+	def prevent_corners(board,level)
+
+		corners = 0
+		if board[0] != nil
+			corners = corners + 1 
+		end
+		if board[2] != nil
+			corners = corners + 1 
+		end
+		if board[6] != nil
+			corners = corners + 1 
+		end
+		if board[8] != nil 
+			corners = corners + 1
+		end
+
+		if corners == 2 && level == 6 && board[4] == 'O'
+			if (board[3] == nil)
+				return 4
+			elsif board[5] == nil
+				return 6
+			elsif board[1] == nil
+				return 2
+			elsif board[7] == nil 
+				return 8
+			end
+		end
+		return -1
+	end
+
+
+	def special_cases(board,level)
+
+		urgent = urgent_move(board)
+		corners = prevent_corners(board,level)
+
+		if (urgent!= -1 )
+			return urgent
+		elsif (corners != -1)
+			return corners
+		else
+			return -1
+		end
+		 
+	end
 
 	def reset		
 		@lowest = Float::INFINITY
-		@highest = -1
 		@possible = [0,0,0,0,0,0,0,0,0]
 
 
 	end
 
-	def best(board)
-		best_player(board)
-		best_computer(board)
-	end
 
-	def best_player(board)
-		for i in (0...9) do
-			if (@possible[i] > @highest)
-				 @highest = @possible[i]
-				@highest_index = i
-			end
 
-		end
-
-	end
 
 	def best_computer(board)
 

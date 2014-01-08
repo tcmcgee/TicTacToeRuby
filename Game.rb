@@ -80,10 +80,10 @@ class Game
 	def pick_first
 
 		done = false
-		if (@computer.instance_of? MiniMaxComputer)
-			done = true
-			set_turn(false)
-		end
+		#if (@computer.instance_of? MiniMaxComputer)
+		#	done = true
+		#	set_turn(false)
+		#end
 
 		while (!done)
 			print "\nWho will go first?"
