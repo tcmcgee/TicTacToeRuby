@@ -7,16 +7,24 @@ class Computer
 		@move = -1
 		
 	end
-	
 
-	def random_move(board)
-		choice = "O"
-		while (choice != nil)
-			num = rand(9)
-			choice = board[num]
+	def Turn(board)
+		if (check_for_two('O',board) != -1)
+			return check_for_two('O',board)
+		elsif (check_for_two('X',board) != -1)
+			return check_for_two('X',board)
+		elsif (middle(board) != -1)
+			return middle(board)
+		elsif (random_corner(board) != -1)
+			return random_corner(board)
+		else
+			return random_move(board)
 		end
-		return num + 1
 	end
+
+
+private
+
 
 	def check_for_two(value,board)
 		possibilities = Array.new
@@ -40,61 +48,41 @@ class Computer
 		return -1
 	end
 
-
-def random_corner(board)
-choice = "O"
-possible = Array.new
-possible = [1,3,7,9]
-
-	while (choice != nil && possible.length != 0)
-		num = rand(possible.length)
-		choice = board[possible[num] - 1]
-		if (choice == nil)
-			return possible[num]
+	def middle(board)
+		if (board[4] == nil)
+			return 5
 		else
-			possible.delete_at(num)
+			return -1
 		end
 	end
-	if (possible.length == 0)
-		return -1
+
+	def random_corner(board)
+	choice = "O"
+	possible = Array.new
+	possible = [1,3,7,9]
+
+		while (choice != nil && possible.length != 0)
+			num = rand(possible.length)
+			choice = board[possible[num] - 1]
+			if (choice == nil)
+				return possible[num]
+			else
+				possible.delete_at(num)
+			end
+		end
+		if (possible.length == 0)
+			return -1
+		end
 	end
 
-end
-
-
-def middle(board)
-	if (board[4] == nil)
-		return 5
-	else
-		return -1
+	def random_move(board)
+		choice = "O"
+		while (choice != nil)
+			num = rand(9)
+			choice = board[num]
+		end
+		return num + 1
 	end
-end
-
-
-
-def Turn(board)
-	if (check_for_two('O',board) != -1)
-		return check_for_two('O',board)
-	elsif (check_for_two('X',board) != -1)
-		return check_for_two('X',board)
-	elsif (middle(board) != -1)
-		return middle(board)
-	elsif (random_corner(board) != -1)
-		return random_corner(board)
-	else
-		return random_move(board)
-	end
-end
-
-		
-		
-
-
-	
-
-
-
-
 
 
 end

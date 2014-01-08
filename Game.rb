@@ -14,6 +14,38 @@ class Game
 		game
 	end
 
+
+private
+
+	def game
+		again =true
+		print instructions
+		gets
+		while (again == true)
+			@tictactoe.reset
+			pick_first
+			play
+			choice = -1
+			done = false
+			print display_board
+			winner
+			while (!done)
+				print "\n Would you like to play again?\n 1. Yes \n 2. No \n"
+				choice = gets.chomp.to_i
+		
+				if choice == 1 
+					done = true
+				elsif choice == 2
+					done = true
+					again = false
+				else 
+					done = false
+				end
+
+			end
+		end
+	end
+
 	def instructions
 		return_string = "Welcome to Tic Tac Toe!\nWhen playing please reference the board as follows.\n Press Enter to continue."
 
@@ -22,10 +54,48 @@ class Game
 		return_string = return_string + display_board + "\n"
 		@tictactoe.set_board(Array.new(9,nil))
 
-		
 		return return_string
 	end
 
+	def pick_first
+
+		done = false
+		while (!done)
+			print "\nWho will go first?"
+			print "\n1. Player\n"
+			print "2. Computer\n"
+			choice = gets.chomp.to_i
+			
+			if choice == 1 
+				done = true
+				set_turn(true)
+			else
+				done = true
+				set_turn(false)
+			end
+		end
+	end
+
+	def play
+		over = false
+		while (!over)
+			if @turn == true
+				player_move
+				
+
+			else
+				board_helper = Array.new
+				for i in (0...9)
+				board_helper[i] = @tictactoe.board[i]
+				end
+				@tictactoe.move(@computer.Turn(board_helper),false)
+				@turn = !turn
+
+			end
+			over = @tictactoe.over
+		end
+
+	end
 
 	def turn
 		@turn
@@ -50,53 +120,6 @@ class Game
 		end
 	end
 
-
-	def play
-		over = false
-		while (!over)
-			if @turn == true
-				player_move
-				
-
-			else
-				board_helper = Array.new
-				for i in (0...9)
-				board_helper[i] = @tictactoe.board[i]
-				end
-				@tictactoe.move(@computer.Turn(board_helper),false)
-				@turn = !turn
-
-			end
-			over = @tictactoe.over
-		end
-
-	end
-
-
-	def pick_first
-
-		done = false
-
-		while (!done)
-			print "\nWho will go first?"
-			print "\n1. Player\n"
-			print "2. Computer\n"
-			choice = gets.chomp.to_i
-			
-		
-		
-			if choice == 1 
-				done = true
-				set_turn(true)
-			else
-				done = true
-				set_turn(false)
-			end
-		end
-
-
-	end
-
 	def winner 
 		if (@tictactoe.get_winner.eql?('T'))
 			print "\n Good Game, it's a Tie!"
@@ -107,49 +130,6 @@ class Game
 		
 		end
 	end
-
-
-	def game
-		again =true
-		print instructions
-		gets
-		while (again == true)
-			@tictactoe.reset
-			pick_first
-			play
-			choice = -1
-			done = false
-			print display_board
-			winner
-			while (!done)
-				print "\n Would you like to play again?\n 1. Yes \n 2. No \n"
-				choice = gets.chomp.to_i
-		
-			if choice == 1 
-				done = true
-			elsif choice == 2
-				done = true
-				again = false
-				
-			else 
-				done = false
-
-			end
-			end
-
-
-			
-
-		end
-	end
-
-
-
-
-
-
-
-
 
 	def display_board
 		return_string = ""
@@ -167,7 +147,6 @@ class Game
 
 		return return_string
 	end
-
 
 end
 
