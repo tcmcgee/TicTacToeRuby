@@ -8,7 +8,7 @@ describe Game do
 
 
 	it "can display a welcome message" do
-		expect(game.instructions).to eq( "Welcome to Tic Tac Toe!\nYou'll be prompted to pick who goes first shortly...\nWhen playing please reference the board as follows.\n 1 | 2 | 3 \n 4 | 5 | 6 \n 7 | 8 | 9 \n")
+		expect(game.instructions).to eq( "Welcome to Tic Tac Toe!\nWhen playing please reference the board as follows.\n\n 1 | 2 | 3 \n 4 | 5 | 6 \n 7 | 8 | 9 \n\n Press Enter to continue..")
 	end
 
 	it "can return a board as a string" do

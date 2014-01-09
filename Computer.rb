@@ -23,7 +23,7 @@ class Computer
 	end
 
 
-private
+
 
 
 	def check_for_two(value,board)

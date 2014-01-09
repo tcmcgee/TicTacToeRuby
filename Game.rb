@@ -15,7 +15,7 @@ class Game
 	end
 
 
-private
+
 
 	def game
 		again =true
@@ -47,11 +47,11 @@ private
 	end
 
 	def instructions
-		return_string = "Welcome to Tic Tac Toe!\nWhen playing please reference the board as follows.\n Press Enter to continue."
+		return_string = "Welcome to Tic Tac Toe!\nWhen playing please reference the board as follows.\n"
 
 		example_board = [1,2,3,4,5,6,7,8,9]
 		@tictactoe.set_board(example_board)
-		return_string = return_string + display_board + "\n"
+		return_string = return_string + display_board + "\n" + "\n Press Enter to continue.."
 		@tictactoe.set_board(Array.new(9,nil))
 
 		return return_string
@@ -111,7 +111,7 @@ private
 			print display_board
 			print "\nWhere would you like to move?\n"
 			move = gets.chomp.to_i
-			if @tictactoe.board[move - 1] == nil
+			if @tictactoe.board[move - 1] == nil && move < 10 && move > 0 
 				valid = true
 				@tictactoe.move(move,true)
 				@turn = !turn

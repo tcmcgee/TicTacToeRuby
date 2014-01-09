@@ -20,14 +20,14 @@ describe Computer do
 		board = ['O','O',nil,
 				nil,nil,nil,
 				nil,nil,nil]
-		expect(computer.CheckForTwo('O',board)).to eq(3)
+		expect(computer.check_for_two('O',board)).to eq(3)
 	end
 
 	it "can return the move to block the player" do
 		board = ['X','X',nil,
 				nil,nil,nil,
 				nil,nil,nil]
-		expect(computer.CheckForTwo('X',board)).to eq(3)
+		expect(computer.check_for_two('X',board)).to eq(3)
 	end
 
 	it "can return a random unoccupied corner space" do
@@ -52,11 +52,6 @@ describe Computer do
 		#expect(computer.Turn).to satisfy{|i| (i == 1 || i == 3|| i == 7 || i == 9)}
 		expect(computer.Turn(board)).to eq(5)
 	end
-
-
-
-
-
 
 
 end
