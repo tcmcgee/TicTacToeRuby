@@ -25,10 +25,11 @@ Main.rb -- Handles the main (function calls to start the game) and allows the pl
   
 Game.rb -- Allows the user to interact with the game, also displays all text.
 
-MiniMaxComputer.rb -- The Hard difficulty computer, uses plays out every game tree and evaluates the board.
+RecursiveComputer.rb -- The Hard difficulty computer, uses plays out every game tree and evaluates the board.
 
 =========================
 
 Thanks for playing and enjoy Tic Tac Toe!!!
+===========================================
 
 
