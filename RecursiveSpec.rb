@@ -3,9 +3,9 @@ require_relative "RecursiveComputer"
 require_relative "TicTacToe"
 require_relative "Game"
 
-describe RecursiveComputer do 
+describe RecursiveComputer do
 	let (:computer) {RecursiveComputer.new}
-	
+
 
 	it "takes the middle given an empty board" do
 
@@ -42,7 +42,7 @@ describe RecursiveComputer do
 		expect(computer.Turn(board)).to eq(3)
 	end
 
-	it "Never loses a game when the player goes first" do
+	it "Never loses a game when the player goes first", t:true do
 		tictactoe = TicTacToe.new
 		play_all_games(tictactoe.board,true)
 	end
@@ -53,7 +53,7 @@ describe RecursiveComputer do
 	end
 
 
-	
+
 
 	def play_all_games(board,turn)
 		over = false
@@ -61,11 +61,11 @@ describe RecursiveComputer do
 			raise_exception_beatable
 			puts board
 
-			over = true		
+			over = true
 		end
 		if (computer_victory(board))
 			over = true
-			
+
 		end
 		if (tie?(board))
 			over = true
@@ -77,7 +77,7 @@ describe RecursiveComputer do
 			temp_board[i] = board[i]
 		end
 		if (!over)
-		if turn 
+		if turn
 			for i in (0...9)
 				if temp_board[i] == nil
 					temp_board[i] = 'X'
@@ -91,7 +91,7 @@ describe RecursiveComputer do
 			play_all_games(temp_board,!turn)
 		end
 		end
-	
+
 	end
 
 	def raise_exception_beatable
@@ -126,7 +126,7 @@ describe RecursiveComputer do
 
 
 	def player_victory(board)
-		
+
 		for possible in possible_wins
 			if ((board[possible[0]].eql?(board[possible[1]])) && (board[possible[0]].eql?(board[possible[2]])) && board[possible[0]] != nil && board[possible[0]] == 'X' )
 				return true
@@ -143,13 +143,4 @@ describe RecursiveComputer do
 		end
 		return false
 	end
-
-
-
-
-
-
-
-
-
 end

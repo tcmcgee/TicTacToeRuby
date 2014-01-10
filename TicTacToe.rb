@@ -1,94 +1,92 @@
+# personal design opinions for this class:
+# instead of initializing and calling set_board and having any mutability
+# I would have this interface:
+#   initialize(board)
+#   tie?               -> bool
+#   has_winner?        -> bool
+#   winner             -> 'x', 'o' (or 1, 2)
+#   move(index, turn)  -> new TicTacToe
+#
+# What that means is
+#   1: instances of this never change
+#   2: users, instead of doing:
+#     @tic_tac_toe.move(...)
+#     now do:
+#     @tic_tac_toe = @tic_tac_toe.move(...)
+
+class TicTacToe
+  attr_reader :board
 
 
-class TicTacToe 
-attr_reader :board
-	
-	
 	def initialize
-		@board = Array.new
-		for i in (0...9)
-			@board[i] =  nil
-		end
-		@turn = true
-		@over = false
-		@winner = ""
+		@board  = Array.new 9
+		@turn   = true
 	end
 
+  # another ehhh.
 	def set_board(new_board)
 		for i in (0...9)
 			@board[i] = new_board[i]
 		end
 	end
 
-
-
 	def move(index, turn)
-		if (turn)
-			@board[index - 1] = "X"
-		else
-			@board[index-1] = "O"
-		end
-		
+    @board[index - 1] = (turn ? "X" : "O")
 	end
 
-	def victory?
-		possibilities = Array.new
-		possibilities = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6] ]
-		for possible in possibilities
-			if ((@board[possible[0]].eql?(@board[possible[1]])) && (@board[possible[0]].eql?(@board[possible[2]])) && @board[possible[0]] != nil  )
-				if (!@turn)
-					@winner = 'O'
-				elsif (@turn)
-					@winner = 'X'
-				end
-				@over = true
-				return true
-			end
-		end
-		return false
-	end
-
+  # see alternative below
 	def tie?
-		count = 0
-		for tile in @board
-			if (!tile.eql?(nil))
-				count = count + 1
-			end
-		end
+    count = 0
+    for tile in @board
+      if (!tile.eql?(nil))
+        count = count + 1
+      end
+    end
+
 		if (victory? == false)
 			if(count == 9)
-				@over = true
-				@winner = 'T'
 				return true
 			else
 				return false
 			end
-
 		else
 			return false
 		end
 	end
 
+	def tie?
+    return false if victory?
+    @board.compact.size == 9
+	end
 
+  # rename: winner
+  def get_winner
+		possibilities = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6] ]
+		for possible in possibilities
+      # introduce some abstraction here
+			if (@board[possible[0]].eql?(@board[possible[1]]) && @board[possible[0]].eql?(@board[possible[2]]) && @board[possible[0]] != nil  )
+        return (@turn ? 'X' : 'O')
+			end
+		end
+		return nil
+	end
 
+  # rename to something like has_winner?
+  def victory?
+    !!get_winner
+  end
+
+  # ehhhhhhh...
+  # at least rename reset!
 	def reset
 		for i in (0...9)
 			@board[i] = nil
 		end
-		@winner = ""
 	end
 
+  # rename: over?
 	def over
-		if (victory? || tie?)
-			return true
-		end
-
-	end
-
-	def get_winner
-		return @winner
+		victory? || tie?
 	end
 
 end
-
-		
