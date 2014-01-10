@@ -49,7 +49,6 @@ describe Computer do
 		board = ['X',nil,'O',
 				nil,nil,nil,
 				'O',nil,'X']
-		#expect(computer.Turn).to satisfy{|i| (i == 1 || i == 3|| i == 7 || i == 9)}
 		expect(computer.Turn(board)).to eq(5)
 	end
 

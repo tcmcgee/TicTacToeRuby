@@ -11,13 +11,6 @@ class Game
 	end
 
 	def start
-		game
-	end
-
-
-
-
-	def game
 		again =true
 		print instructions
 		gets

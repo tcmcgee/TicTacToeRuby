@@ -1,10 +1,10 @@
 require "rspec"
-require_relative "MiniMaxComputer"
+require_relative "RecursiveComputer"
 require_relative "TicTacToe"
 require_relative "Game"
 
-describe MiniMaxComputer do 
-	let (:computer) {MiniMaxComputer.new}
+describe RecursiveComputer do 
+	let (:computer) {RecursiveComputer.new}
 	
 
 	it "takes the middle given an empty board" do
@@ -22,7 +22,7 @@ describe MiniMaxComputer do
 
 	it "Wins when given the option" do
 			board = ['O','O',nil,
-				nil,'X','X',
+				nil,nil,nil,
 				nil,nil,nil]
 		expect(computer.Turn(board)).to eq(3)
 	end

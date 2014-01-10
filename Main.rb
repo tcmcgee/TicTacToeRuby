@@ -1,7 +1,7 @@
 require_relative "TicTacToe"
 require_relative "Computer"
 require_relative "Game"
-require_relative "MiniMaxComputer"
+require_relative "RecursiveComputer"
 
 
 puts "Please pick your computers difficulty!\n"
@@ -18,10 +18,11 @@ while (!valid)
 	end
 	if choice == 2
 		valid = true
-		computer = MiniMaxComputer.new
+		computer = RecursiveComputer.new
 	end
 
 end
+
 tictactoe = TicTacToe.new
 game = Game.new(tictactoe,computer)
 

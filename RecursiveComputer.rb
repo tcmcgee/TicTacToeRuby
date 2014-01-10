@@ -1,5 +1,4 @@
-class MiniMaxComputer
-	#IMPORTANT NOTE: Very contrary to class name does not actually use Minimax algorithim 
+class RecursiveComputer
 
 
 
