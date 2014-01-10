@@ -9,14 +9,18 @@ class Computer
 	end
 
 	def Turn(board)
-		if (check_for_two('O',board) != -1)
-			return check_for_two('O',board)
-		elsif (check_for_two('X',board) != -1)
-			return check_for_two('X',board)
-		elsif (middle(board) != -1)
-			return middle(board)
-		elsif (random_corner(board) != -1)
-			return random_corner(board)
+		win = check_for_two('O',board)
+		block = (check_for_two('X',board))
+		mid = middle(board)
+		corner = random_corner(board)
+		if (win != -1)
+			return win
+		elsif (block != -1)
+			return block
+		elsif (mid != -1)
+			return mid
+		elsif (corner != -1)
+			return corner
 		else
 			return random_move(board)
 		end

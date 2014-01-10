@@ -62,7 +62,7 @@ class Game
 			if choice == 1 
 				done = true
 				set_turn(true)
-			else
+			elsif choice == 2
 				done = true
 				set_turn(false)
 			end

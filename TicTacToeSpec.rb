@@ -54,6 +54,17 @@ describe TicTacToe do
 	end
 
 
+	it "can tell you who the winner is" do
+			board = ['X','X','X',
+						'X','O','O',
+						'O','X','O']
+			game.set_board(board)
+			game.victory?
+			expect(game.get_winner).to eq('X')
+	end
+
+
+
 	
 end
 

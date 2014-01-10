@@ -52,5 +52,4 @@ describe Computer do
 		expect(computer.Turn(board)).to eq(5)
 	end
 
-
 end

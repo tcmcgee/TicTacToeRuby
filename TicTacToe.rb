@@ -36,9 +36,9 @@ attr_reader :board
 		possibilities = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6] ]
 		for possible in possibilities
 			if ((@board[possible[0]].eql?(@board[possible[1]])) && (@board[possible[0]].eql?(@board[possible[2]])) && @board[possible[0]] != nil  )
-				if (@turn)
+				if (!@turn)
 					@winner = 'O'
-				elsif (!@turn)
+				elsif (@turn)
 					@winner = 'X'
 				end
 				@over = true
