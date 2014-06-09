@@ -23,7 +23,7 @@ describe Game do
 		expect(game.turn).to eq(true)
 	end
 
-	it "can change turns after each move" do
+	xit "can change turns after each move" do
 		game.set_turn(true)
 		expect(game.turn).to eq(true)
 		game.stub(:gets).and_return("1")
@@ -31,11 +31,7 @@ describe Game do
 		expect(game.turn).to eq(false)
 	end
 
-
-
-
-
-
-
-
+  describe '#play' do
+    it 'swaps the turn'
+  end
 end

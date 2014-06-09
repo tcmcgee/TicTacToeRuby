@@ -4,7 +4,7 @@ require_relative "Computer"
 
 
 
-describe Computer do 
+describe Computer do
 	let (:game) {TicTacToe.new}
 	let (:computer) {Computer.new}
 	let (:default_board) {Array.new(9,nil)}
@@ -34,11 +34,11 @@ describe Computer do
 		expect(computer.random_corner(default_board)).to satisfy {| i| i == 1 || i == 3|| i == 7 || i == 9}
 	end
 
-	it "retuns -1 if there is no corner availible" do
+	it "retuns nil if there is no corner availible" do
 		board = ['X',nil,'O',
 				nil,nil,nil,
 				'O',nil,'X']
-		expect(computer.random_corner(board)).to eq(-1)
+		expect(computer.random_corner(board)).to eq(nil)
 	end
 
 	it "checks to see if the middle is availible and returns it's index if it is" do

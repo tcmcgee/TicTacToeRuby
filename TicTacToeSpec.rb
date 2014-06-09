@@ -3,7 +3,7 @@ require_relative "TicTacToe"
 require_relative "Computer"
 
 
-describe TicTacToe do 
+describe TicTacToe do
 	let (:game) {TicTacToe.new}
 
 	it "has a board" do
@@ -31,7 +31,7 @@ describe TicTacToe do
 								'O','X','O']
 				game.set_board(board)
 		expect(game.tie?).to eq(true)
-		
+
 	end
 
 
@@ -65,6 +65,6 @@ describe TicTacToe do
 
 
 
-	
+
 end
 

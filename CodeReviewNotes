@@ -1,0 +1,71 @@
+Notes (Tom tic tac toe https://github.com/tcmcgee/tictactoeruby)
+----------------------------------------------------------------
+
+Ruby uses snake_case filenames
+
+Typically structure will follow:
+  administrative_files (Rakefile, readme, etc)
+  bin/
+    ttt (what you're calling Main.rb -- no extension, make executable, use a shebang)
+  lib/
+    ttt.rb
+    ttt/
+      computer.rb (defines the class Ttt::Computer)
+      ...
+  spec/
+    ttt_spec.rb
+    computer_spec.rb
+
+Namespacing: Game -> Ttt::Game
+
+Game shouldn't talk directly to stdin/stdout (gets/print).
+  You can get pretty far w/ a little bit of effort
+  so initialize like this: Game.new(tictactoe, computer, $stdin, $stdout)
+  And then in game, store stdin in a var, and instead of `gets` use `stdin.gets`
+
+  In tests, that means you can do:
+  require 'stringio'
+  stdin = StringIO.new("1\n...")
+  stdout = StringIO.new
+  Game.new(tictactoe, computer, stdin, stdout).start
+  stdout.string.should include "Do you want to play again" # or w/e
+
+There's no message when the user enters an invalid input from Main (e.g. 3)
+
+Can only play human vs computer, but not human vs human
+
+First move of computer takes a while, consider hard-coding that specific use-case
+
+Try to keep code formatting cleaner (avoid lots of empty lines, keep indentation correct)
+
+Game.rb
+  #instructions mutate the current game.
+  #winner should return the string like #instructions
+  not 100% code coverage (e.g. I can put a raise in #start and it does not fail)
+  I would pull the "replay" stuff up to something above Game
+
+  With the pattern of validating inputs, try something like this:
+    def pick_first
+      get_input "\nWho will go first?"\
+                "\n1. Player\n"\
+                "2. Computer\n",
+                valid_options: ["1", "2"],
+                stdout: stdout,
+                stdin:  stdin
+
+TicTacToe.rb
+  #victory?
+    use #== instead of #eql?
+      Java mapping:    Java(==) -> Ruby(equal?)
+                       Java(equals()) -> Ruby(==)
+                       Java(Hash) -> Ruby(eql?) # basically hash/set equality
+
+The possibilities array are in multiple classes, move into something central
+  probably into TicTacToe.
+
+Many classes have to deal with board logic, because we're passing around an array
+  But TicTacToe is supposed to represent this board
+  If we passed around TicTacToe instances instead of the array
+  Then we could centralize all that board logic in TicTacToe and have good names to refer to them
+  e.g. RecursiveComputer#Turn calculates number of available spaces procedurally (https://github.com/tcmcgee/TicTacToeRuby/blob/8f31354403df5fe110d87067fd499f3f8a364ad6/RecursiveComputer.rb#L15-19)
+    But If we gave it a TicTacToe instance, we could say `level = tic_tac_toe.num_available_spaces`

@@ -15,12 +15,10 @@ while (!valid)
 	if choice == 1
 		valid = true
 		computer = Computer.new
-	end
-	if choice == 2
+  elsif choice == 2
 		valid = true
 		computer = RecursiveComputer.new
 	end
-
 end
 
 tictactoe = TicTacToe.new
