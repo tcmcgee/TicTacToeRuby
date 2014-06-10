@@ -1,12 +1,22 @@
 class RecursiveComputer
+<<<<<<< HEAD
 	def initialize
     reset
 		@lowest_index = -1
+=======
+	#1,9,8,3,6
+	def initialize
+
+		@move_thing = 0
+		@move_value = 0
+
+>>>>>>> Recursive Computer now implements Minimax
 	end
 
   # rename Turn -> turn
   # prefer to take a tic_tac_toe than a board
   # because the tic_tac_toe can provide abstractions around the things we calculate
+<<<<<<< HEAD
 	def Turn(board)
 		level = num_available_moves(board)
 		if special_cases(board, level) != -1
@@ -21,11 +31,24 @@ class RecursiveComputer
 	end
 
 private
+=======
+  def Turn(board)
+  	current_turn = false
+  	empty = num_available_moves(board)
+  	
+
+  	move =  (tree board, current_turn).to_i + 1
+
+  	print @move_thing.to_s + "\n"
+  	print @move_value
+  	return move
+>>>>>>> Recursive Computer now implements Minimax
 
   def num_available_moves(board)
     board.size - board.compact.size
   end
 
+<<<<<<< HEAD
 	def reset
 		@lowest   = Float::INFINITY
 		@possible = Array.new 9, 0
@@ -86,9 +109,24 @@ private
 			if board[8] != nil
 				corners = corners + 1
 			end
+=======
 
-			if corners == 2
 
+
+
+
+  end
+
+  private
+
+  def num_available_moves(board)
+  	board.size - board.compact.size
+  end
+
+>>>>>>> Recursive Computer now implements Minimax
+
+
+<<<<<<< HEAD
 				if (board[3] == nil)
 					return 4
 				elsif board[5] == nil
@@ -113,10 +151,25 @@ private
 				@possible[index] += level.next * 100
 			end
 		end
+=======
+  def tree(board,turn,empty = 0,best = {})
+  	move_char = (turn ? 'X' : 'O')
+		if (computer_victory(board) || player_victory(board))
+			return -10
+		end
+		if num_available_moves(board) == 0
+			return 0
+		end
 
-		for i in (0...9)
+>>>>>>> Recursive Computer now implements Minimax
+
+
+		
+
+		for i in (0...9) do
 			if (board[i] != nil)
         # no op
+<<<<<<< HEAD
 			elsif (player_victory(board) || computer_victory(board) || level == 0)
         # no op
 			else
@@ -141,6 +194,36 @@ private
 	end
 
   def player_victory(board)
+=======
+    else
+				#print board
+				
+				new_board = Array.new(9,nil)
+				
+				for j in (0...9)
+					new_board[j] = board[j]
+				end
+
+				new_board[i] = move_char
+				
+				best[(i).to_s] = (-1 * (tree new_board, !turn, empty + 1,{}))
+			end
+		end
+		
+		move = best.max_by { |key,value| value }[0]
+		high_score = best.max_by { |key, value| value }[1]
+
+		if  empty == 0
+			@move_thing = move
+			return move
+		else
+			@move_value = high_score
+			return high_score 
+		end
+	end
+
+	def player_victory(board)
+>>>>>>> Recursive Computer now implements Minimax
 		for possible in possible_wins
 			if ((board[possible[0]].eql?(board[possible[1]])) && (board[possible[0]].eql?(board[possible[2]])) && board[possible[0]] != nil && board[possible[0]] == 'X' )
 				return true
@@ -163,6 +246,7 @@ private
 		possible_wins = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6] ]
 	end
 
+<<<<<<< HEAD
 	def best_computer
     lowest_index = -1
 		for i in (0...9) do
@@ -174,3 +258,6 @@ private
     return lowest_index
 	end
 end
+=======
+end
+>>>>>>> Recursive Computer now implements Minimax

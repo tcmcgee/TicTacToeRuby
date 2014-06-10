@@ -44,21 +44,25 @@ describe RecursiveComputer do
 
 	it "Never loses a game when the player goes first", t:true do
 		tictactoe = TicTacToe.new
-		play_all_games(tictactoe.board,true)
+		play_all_games(tictactoe.board,true,[])
 	end
 
 	it "Never loses a game when the computer goes first" do
 		tictactoe = TicTacToe.new
-		play_all_games(tictactoe.board,false)
+		play_all_games(tictactoe.board,false,[])
 	end
 
 
 
 
-	def play_all_games(board,turn)
+	def play_all_games(board,turn,moves)
 		over = false
+		playermoves = []
 		if (player_victory(board))
+			print board
+			print moves
 			raise_exception_beatable
+
 			puts board
 
 			over = true
@@ -81,14 +85,16 @@ describe RecursiveComputer do
 			for i in (0...9)
 				if temp_board[i] == nil
 					temp_board[i] = 'X'
-					play_all_games(temp_board,!turn)
+					moves.push(i)
+					play_all_games(temp_board,!turn,moves)
+					moves = []
 					temp_board[i] = nil
 				end
 			end
 		else
 			move = computer.Turn(board)
 			temp_board[move - 1] = 'O'
-			play_all_games(temp_board,!turn)
+			play_all_games(temp_board,!turn,moves)
 		end
 		end
 
@@ -96,6 +102,7 @@ describe RecursiveComputer do
 
 	def raise_exception_beatable
 		raise "This game is beatable!"
+		print board
 	end
 
 
