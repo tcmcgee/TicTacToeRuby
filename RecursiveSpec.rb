@@ -28,17 +28,17 @@ describe RecursiveComputer do
 	end
 
 	it "Prefers winning over blocking a player win" do
-			board = ['X','X',nil,
+			board = [nil,nil,nil,
 				'O','O',nil,
-				nil,nil,nil]
+				nil,'X','X']
 		expect(computer.Turn(board)).to eq(6)
 	end
 
 	it "should block an immediate loss over a  future win" do
 
 		board = ['X','X',nil,
-				nil,nil,nil,
-				nil,'O',nil]
+				nil,'O',nil,
+				nil,nil,nil]
 		expect(computer.Turn(board)).to eq(3)
 	end
 
@@ -59,8 +59,6 @@ describe RecursiveComputer do
 		over = false
 		playermoves = []
 		if (player_victory(board))
-			print board
-			print moves
 			raise_exception_beatable
 
 			puts board
