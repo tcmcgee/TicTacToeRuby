@@ -13,12 +13,7 @@ class RecursiveComputer
   def Turn(board)
   	current_turn = false
   	empty = num_available_moves(board)
-  	
-
   	move =  (tree board, current_turn).to_i + 1
-
-  	print @move_thing.to_s + "\n"
-  	print @move_value
   	return move
 
 
