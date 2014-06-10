@@ -45,7 +45,7 @@ class RecursiveComputer
 
 		
 
-		for i in (0...9) do
+		for i in (0...board.length) do
 			if (board[i] != nil)
         # no op
     else
