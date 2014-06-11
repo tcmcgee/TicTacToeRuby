@@ -10,6 +10,9 @@ class RecursiveComputer
   def Turn(board)
   	current_turn = false
   	empty = num_available_moves(board)
+  	if empty > 7
+  		print "Thinking... Please Wait!"
+  	end
   	move =  (tree board, current_turn).to_i + 1
   	return move
   end
