@@ -4,23 +4,27 @@ require_relative "Game"
 require_relative "RecursiveComputer"
 
 
-=begin
+
 puts "Please pick your board size!!\n"
 
 print "1. 3x3\n"
 print "2. 4x4\n"
 valid2 = false
-
+size = -1
 while (!valid2)
 	choice = gets.chomp.to_i
 	if choice == 1
+		size = 9
 		valid2 = true
   elsif choice == 2
+  	size = 16
 		valid2 = true
+	else 
+		print "Please give valid input! (1 or 2)"
 		
 	end
 end
-=end
+
 
 
 puts "Please pick your computers difficulty!\n"
@@ -42,7 +46,7 @@ while (!valid)
 	end
 end
 
-tictactoe = TicTacToe.new
+tictactoe = TicTacToe.new(size)
 game = Game.new(tictactoe,computer)
 
 game.start

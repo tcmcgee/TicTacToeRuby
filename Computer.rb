@@ -11,19 +11,22 @@ class Computer
 	def Turn(board)
 		win = check_for_two('O',board)
 		block = (check_for_two('X',board))
-		mid = middle(board)
-		corner = random_corner(board)
+		#mid = middle(board)
+		#corner = random_corner(board)
+		#if board.compact.length == board.length
 		if (win != -1)
 			return win
 		elsif (block != -1)
 			return block
-		elsif (mid != -1)
-			return mid
-		elsif (corner != -1)
-			return corner
-		else
-			return random_move(board)
-		end
+		#elsif (mid != -1)
+		#	return mid
+		#elsif (corner != -1)
+		#	return corner
+		#else
+	else
+		return random_move(board)
+	end
+		#end
 	end
 
 
@@ -61,9 +64,9 @@ class Computer
 	end
 
 	def random_corner(board)
-	choice = "O"
-	possible = Array.new
-	possible = [1,3,7,9]
+		choice = "O"
+		possible = Array.new
+		possible = [1,3,7,9]
 
 		while (choice != nil && possible.length != 0)
 			num = rand(possible.length)
@@ -82,7 +85,7 @@ class Computer
 	def random_move(board)
 		choice = "O"
 		while (choice != nil)
-			num = rand(9)
+			num = rand(board.length)
 			choice = board[num]
 		end
 		return num + 1
