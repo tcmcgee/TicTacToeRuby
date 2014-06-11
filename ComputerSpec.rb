@@ -34,11 +34,11 @@ describe Computer do
 		expect(computer.random_corner(default_board)).to satisfy {| i| i == 1 || i == 3|| i == 7 || i == 9}
 	end
 
-	it "retuns nil if there is no corner availible" do
+	it "retuns -1 if there is no corner availible" do
 		board = ['X',nil,'O',
 				nil,nil,nil,
 				'O',nil,'X']
-		expect(computer.random_corner(board)).to eq(nil)
+		expect(computer.random_corner(board)).to eq(-1)
 	end
 
 	it "checks to see if the middle is availible and returns it's index if it is" do

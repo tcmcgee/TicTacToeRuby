@@ -17,12 +17,13 @@
 class TicTacToe
   attr_reader :board
 
-
-	def initialize()
-		@board  = Array.new 9
+  def initialize
+  	@board  = Array.new(9,nil)
 		@turn   = true
+		@size = 9
 	end
 
+	
   # another ehhh.
 	def set_board(new_board)
 		for i in (0...board.length)
