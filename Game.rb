@@ -28,6 +28,9 @@ class Game
     choice = gets.chomp.to_i
     return true  if choice == 1
     return false if choice == 2
+    if choice != 1 || choice != 2 
+    	print "Please enter a valid input (1 or 2) \n"
+    end
     play_again?
   end
 
@@ -136,7 +139,7 @@ class Game
 		end
 		string_board[counter] = tile
 		counter = counter + 1}
-		return_string = "\n" + string_board[0] + "|" + string_board[1] + "|" + string_board[2] + "\n" + string_board[3] + "|" + string_board[4] + "|" + string_board[5] + "\n" + string_board[6] + "|" + string_board[7] + "|" + string_board[8]
+		return_string = "\n" + string_board[0] + "|" + string_board[1] + "|" + string_board[2] + "\n" + "-----------" + "\n" + string_board[3] + "|" + string_board[4] + "|" + string_board[5] + "\n"  + "-----------" + "\n" + string_board[6] + "|" + string_board[7] + "|" + string_board[8]
 
 		return return_string
 	end
