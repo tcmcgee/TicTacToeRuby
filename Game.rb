@@ -144,11 +144,16 @@ class Game
 		tictactoe.board.each{|tile|
 			index = index + 1
 			if (tile == nil)
-				if index < 10
-					tile =  " " + index.to_s + " "
+				if size == 16
+					if index < 10
+						tile =  " " + index.to_s + " "
+					else
+						tile =  " " + index.to_s
+					end
 				else
-					tile =  " " + index.to_s
+					tile = " _ "
 				end
+
 			else
 				tile = " " + tile.to_s + " "
 			end
@@ -173,7 +178,7 @@ class Game
 				return_string = return_string + "\n"
 			end
 		end#end outer for
-		
+
 		
 		#return_string = "\n" + string_board[0] + "|" + string_board[1] + "|" + string_board[2] + "\n" + "-----------" + "\n" + string_board[3] + "|" + string_board[4] + "|" + string_board[5] + "\n"  + "-----------" + "\n" + string_board[6] + "|" + string_board[7] + "|" + string_board[8]
 

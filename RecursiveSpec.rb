@@ -50,12 +50,12 @@ describe RecursiveComputer do
 	end
 
 	it "Never loses a game when the player goes first", t:true do
-		tictactoe = TicTacToe.new
+		tictactoe = TicTacToe.new(9)
 		play_all_games(tictactoe.board,true)
 	end
 
 	it "Never loses a game when the computer goes first" do
-		tictactoe = TicTacToe.new
+		tictactoe = TicTacToe.new(9)
 		play_all_games(tictactoe.board,false)
 	end
 

@@ -4,7 +4,7 @@ require_relative "Computer"
 
 
 describe TicTacToe do
-	let (:game) {TicTacToe.new}
+	let (:game) {TicTacToe.new(9)}
 
 	it "has a board" do
 		expect(game.board).to eq(Array.new(9,nil))

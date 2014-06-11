@@ -5,7 +5,7 @@ require_relative "Computer"
 
 
 describe Computer do
-	let (:game) {TicTacToe.new}
+	let (:game) {TicTacToe.new(9)}
 	let (:computer) {Computer.new}
 	let (:default_board) {Array.new(9,nil)}
 

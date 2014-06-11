@@ -4,11 +4,11 @@ require_relative "TicTacToe"
 require_relative "Computer"
 
 describe Game do
-	let (:game) {Game.new(TicTacToe.new,Computer.new)}
+	let (:game) {Game.new(TicTacToe.new(9),Computer.new)}
 
 
 	it "can display a welcome message" do
-		expect(game.instructions).to eq( "Welcome to Tic Tac Toe!\nWhen playing please reference the board as follows.\n\n 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n\n Press Enter to continue..")
+		expect(game.instructions).to eq( "Welcome to Tic Tac Toe!\nWhen playing please reference the board as follows.\n\n 1 | 2 | 3 \n --------------\n 4 | 5 | 6 \n --------------\n 7 | 8 | 9 \n\n\n Press Enter to continue..")
 	end
 
 	it "can return a board as a string" do

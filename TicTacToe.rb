@@ -83,11 +83,11 @@ class TicTacToe
       # introduce some abstraction here
       if size == 9
       	if (@board[possible[0]].eql?(@board[possible[1]]) && @board[possible[0]].eql?(@board[possible[2]]) && @board[possible[0]] != nil  )
-      	  return true#(@turn ? 'X' : 'O')
+      	  return (@turn ? 'X' : 'O')
       	end
       else
       	if (@board[possible[0]].eql?(@board[possible[1]]) && @board[possible[0]].eql?(@board[possible[2]]) && @board[possible[0]].eql?(@board[possible[3]]) && @board[possible[0]] != nil  )
-      	  return true#(@turn ? 'X' : 'O')
+      	  return (@turn ? 'X' : 'O')
       	end
       end
     end
