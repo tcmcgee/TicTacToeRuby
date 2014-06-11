@@ -41,6 +41,19 @@ class Game
 		return return_string
 	end
 
+	def help
+		size = @tictactoe.get_board.length
+		example_board = Array.new(size,nil)
+		for i in (0...size)
+			example_board[i] = i
+		end
+		ttt = TicTacToe.new
+		ttt.set_board example_board
+		return_string = "Please reference the board as follows.\n"
+		return_string = return_string + display_board(ttt) + "\n" + "\n Press Enter to continue.."
+		return return_string
+	end
+
 	def pick_first
 		done = false
 		while (!done)
@@ -55,6 +68,8 @@ class Game
 			elsif choice == 2
 				done = true
 				self.turn = false
+			else
+				print "Please enter a valid input! (1 or 2) \n"
 			end
 		end
 	end
@@ -89,6 +104,12 @@ class Game
 			if @tictactoe.board[move - 1] == nil && move < 10 && move > 0
 				valid = true
 				@tictactoe.move(move,true)
+			elsif move == 0
+				print help
+				gets
+
+			else
+				print "Please enter a valid input, or enter 0 for help!"
 			end
 		end
 	end

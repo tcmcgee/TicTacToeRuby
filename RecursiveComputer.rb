@@ -59,7 +59,7 @@ class RecursiveComputer
 	end
 
 	def player_victory(board)
-		for possible in possible_wins
+		for possible in possible_wins(board)
 			if ((board[possible[0]].eql?(board[possible[1]])) && (board[possible[0]].eql?(board[possible[2]])) && board[possible[0]] != nil && board[possible[0]] == 'X' )
 				return true
 			end

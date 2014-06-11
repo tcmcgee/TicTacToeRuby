@@ -34,11 +34,11 @@ while (!valid)
 	if choice == 1
 		valid = true
 		computer = Computer.new
-  elsif choice == 2
+  	elsif choice == 2
 		valid = true
 		computer = RecursiveComputer.new
 	else
-		print "Please enter 1 or 2."
+		print "Please enter a valid input! (1 or 2)\n"
 	end
 end
 

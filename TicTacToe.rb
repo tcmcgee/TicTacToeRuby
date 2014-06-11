@@ -18,14 +18,14 @@ class TicTacToe
   attr_reader :board
 
 
-	def initialize
+	def initialize()
 		@board  = Array.new 9
 		@turn   = true
 	end
 
   # another ehhh.
 	def set_board(new_board)
-		for i in (0...9)
+		for i in (0...board.length)
 			@board[i] = new_board[i]
 		end
 	end
@@ -44,7 +44,7 @@ class TicTacToe
     end
 
 		if (victory? == false)
-			if(count == 9)
+			if(count == board.length)
 				return true
 			else
 				return false
@@ -53,12 +53,16 @@ class TicTacToe
 			return false
 		end
 
-		
+
+	end
+
+	def get_board
+		return @board
 	end
 
 	def tie?
     return false if victory?
-    @board.compact.size == 9
+    @board.compact.size == board.length
 	end
 
   # rename: winner
@@ -81,7 +85,7 @@ class TicTacToe
   # ehhhhhhh...
   # at least rename reset!
 	def reset
-		for i in (0...9)
+		for i in (0...board.length)
 			@board[i] = nil
 		end
 	end
