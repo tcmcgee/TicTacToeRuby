@@ -85,6 +85,9 @@ class Game
     if turn
       player_move
     else
+    	if @tictactoe.get_board.compact.length < 2
+    		print "Thinking... Please Wait!"
+    	end
       @tictactoe.move(@computer.Turn(@tictactoe.board), false)
     end
     self.turn = !turn
