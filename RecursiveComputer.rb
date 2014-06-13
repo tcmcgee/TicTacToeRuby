@@ -9,7 +9,7 @@ class RecursiveComputer
   # because the tic_tac_toe can provide abstractions around the things we calculate
   def Turn(board)
   	current_turn = false
-  	move =  (tree board, current_turn, 0, {}).to_i + 1
+  	move =  (tree board, current_turn, 0, {}, Float::INFINITY, Float::INFINITY * -1).to_i + 1
   	return move
   end
 
@@ -21,7 +21,7 @@ class RecursiveComputer
 
 
 
-  def tree(board,turn,empty,best)
+  def tree(board,turn,empty,best,a,b)
   	move_char = (turn ? 'X' : 'O')
   	if (computer_victory(board) || player_victory(board))
   		return -10
@@ -42,7 +42,7 @@ class RecursiveComputer
       		new_board[j] = board[j]
       	end
       	new_board[i] = move_char
-      	best[(i).to_s] = (-1 * (tree new_board, !turn, empty + 1,{}))
+      	best[(i).to_s] = (-1 * (tree new_board, !turn, empty + 1,{},a,b))
       end
     end
 
