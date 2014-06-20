@@ -9,7 +9,7 @@ class RecursiveComputer
   # because the tic_tac_toe can provide abstractions around the things we calculate
   def Turn(board)
   	current_turn = false
-  	move =  (tree board, current_turn, 0, {}, Float::INFINITY, Float::INFINITY * -1).to_i + 1
+  	move =  minimax(board, current_turn, 0, {}, Float::INFINITY, Float::INFINITY * -1).to_i + 1
   	return move
   end
 
@@ -19,12 +19,10 @@ class RecursiveComputer
   	board.size - board.compact.size
   end
 
-
-
-  def tree(board,turn,empty,best,a,b)
+  def minimax(board,turn,depth,best,a,b)
   	move_char = (turn ? 'X' : 'O')
   	if (computer_victory(board) || player_victory(board))
-  		return -10 * (board.size + 1 - empty)
+  		return -10 * (board.size + 1 - depth)
   	elsif num_available_moves(board) == 0
   		return 0
   	end
@@ -38,13 +36,13 @@ class RecursiveComputer
       		new_board[j] = board[j]
       	end
       	new_board[i] = move_char
-      	best[(i).to_s] = -1 * tree(new_board, !turn, empty + 1,{},a,b)
+      	best[(i).to_s] = -1 * minimax(new_board, !turn, depth + 1,{},a,b)
       end
     end
 
     move = best.max_by { |key,value| value }[0]
     high_score = best.max_by { |key, value| value }[1]
-    if  empty == 0
+    if  depth == 0
     	return move
     else
     	return high_score 
