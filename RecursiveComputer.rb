@@ -24,7 +24,7 @@ class RecursiveComputer
   def tree(board,turn,empty,best,a,b)
   	move_char = (turn ? 'X' : 'O')
   	if (computer_victory(board) || player_victory(board))
-  		return -10
+  		return -10 * (board.size + 1 - empty)
   	elsif num_available_moves(board) == 0
   		return 0
   	end

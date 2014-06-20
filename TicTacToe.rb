@@ -86,7 +86,7 @@ class TicTacToe
   # ehhhhhhh...
   # at least rename reset!
 	def reset
-		for i in (0...board.length)
+		(0...board.length).each do |i|
 			@board[i] = nil
 		end
 	end

@@ -35,7 +35,7 @@ describe RecursiveComputer do
 	end
 
 	it "Prefers winning over blocking a player win" do
-			board = [nil,nil,nil,
+			board = ['X','X', nil,
 				'O','O',nil,
 				nil,'X','X']
 		expect(computer.Turn(board)).to eq(6)
