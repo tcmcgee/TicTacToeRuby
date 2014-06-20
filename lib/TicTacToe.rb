@@ -23,11 +23,10 @@ class TicTacToe
 		@size = 9
 	end
 
-	
   # another ehhh.
 	def set_board(new_board)
-		for i in (0...board.length)
-			@board[i] = new_board[i]
+		(0...board.length).each do |index|
+			@board[index] = new_board[index]
 		end
 	end
 
@@ -53,8 +52,6 @@ class TicTacToe
 		else
 			return false
 		end
-
-
 	end
 
 	def get_board

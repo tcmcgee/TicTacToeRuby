@@ -47,7 +47,7 @@ class Game
 	def help
 		size = @tictactoe.get_board.length
 		example_board = Array.new(size,nil)
-		for i in (0...size)
+		(0...size).each do |i|
 			example_board[i] = i
 		end
 		ttt = TicTacToe.new
