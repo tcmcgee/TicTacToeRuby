@@ -41,21 +41,23 @@ class RecursiveComputer
           new_board[j] = board[j]
         end
         new_board[i] = move_char
-        score = -1 * negamax(new_board, !turn, depth + 1,{},-beta,-a,child_num)
+        score = -1 * negamax(new_board, !turn, depth + 1,{},-beta,-a,child_num).to_i
         best[(i).to_s] = score
-        if (a < score && score < b && old_child_num > 1)
-          score = -1 * negamax(new_board, !turn, depth + 1,{},-b,-a,child_num)
+        if (a < score && score < b && old_child_num != 1)
+          score = -1 * negamax(new_board, !turn, depth + 1,{},-b,-a,child_num).to_i
           best[(i).to_s] = score
         end
         a = [score,a].max
+        b = a + 1
         best[(i).to_s] = a
-        if a>= b
-          break
+        if a >= b
+          return a
         end
+
       end
 
     end
-    b = a + 1
+    
     move = best.max_by { |key,value| value }[0]
     high_score = best.max_by { |key, value| value }[1]
     if  depth == 0
