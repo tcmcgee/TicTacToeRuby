@@ -58,18 +58,27 @@ class RecursiveComputer
 
   def player_victory(board)
   	for possible in possible_wins(board)
-  		if ((board[possible[0]].eql?(board[possible[1]])) && (board[possible[0]].eql?(board[possible[2]])) && board[possible[0]] != nil && board[possible[0]] == 'X' )
-  			return true
-  		end
-  	end
+      if (size == 9)
+  		  if ((board[possible[0]].eql?(board[possible[1]])) && (board[possible[0]].eql?(board[possible[2]])) && board[possible[0]] != nil && board[possible[0]] == 'X' )
+  			 return true
+  		  end
+      else
+        if (@board[possible[0]].eql?(@board[possible[1]]) && @board[possible[0]].eql?(@board[possible[2]]) && @board[possible[0]].eql?(@board[possible[3]]) && @board[possible[0]] != nil && board[possible[0]] = 'X')
+  	     return true
+      end
+    end
   	return false
   end
 
   def computer_victory(board)
   	for possible in possible_wins(board)
-  		if ((board[possible[0]].eql?(board[possible[1]])) && (board[possible[0]].eql?(board[possible[2]])) && board[possible[0]] != nil && board[possible[0]] == 'O' )
-  			return true
-  		end
+  	 if ((board[possible[0]].eql?(board[possible[1]])) && (board[possible[0]].eql?(board[possible[2]])) && board[possible[0]] != nil && board[possible[0]] == 'O' )
+         return true
+        end
+      else
+        if (@board[possible[0]].eql?(@board[possible[1]]) && @board[possible[0]].eql?(@board[possible[2]]) && @board[possible[0]].eql?(@board[possible[3]]) && @board[possible[0]] != nil && board[possible[0]] = 'O')
+         return true
+      end
   	end
   	return false
   end
