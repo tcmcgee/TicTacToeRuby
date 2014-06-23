@@ -1,6 +1,7 @@
 class RecursiveComputer
 	#1,9,8,3,6
 	def initialize
+    @depth = 0
 
 	end
 
@@ -34,7 +35,10 @@ class RecursiveComputer
 
       if (board[i] != nil)
         # no op
-      else    
+      else  
+        if (board.length - num_available_moves(board) > board.length / 2 )
+          return 0 
+        end
         child_num += 1  
         new_board = Array.new(board.length,nil)
         (0...board.length).each do |j|
@@ -42,20 +46,16 @@ class RecursiveComputer
         end
         new_board[i] = move_char
         score = -1 * negamax(new_board, !turn, depth + 1,{},-beta,-a,child_num).to_i
-        best[(i).to_s] = score
         if (a < score && score < b && old_child_num != 1)
           score = -1 * negamax(new_board, !turn, depth + 1,{},-b,-a,child_num).to_i
-          best[(i).to_s] = score
         end
         a = [score,a].max
         b = a + 1
         best[(i).to_s] = a
         if a >= b
-          return a
+          break
         end
-
       end
-
     end
     
     move = best.max_by { |key,value| value }[0]

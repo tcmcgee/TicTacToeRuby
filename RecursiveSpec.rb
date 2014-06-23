@@ -50,12 +50,12 @@ describe RecursiveComputer do
 	end
 
 	it "Never loses a game when the player goes first", t:true do
-		tictactoe = TicTacToe.new(9)
+		tictactoe = TicTacToe.new(16)
 		play_all_games(tictactoe.board,true)
 	end
 
 	it "Never loses a game when the computer goes first" do
-		tictactoe = TicTacToe.new(9)
+		tictactoe = TicTacToe.new(16)
 		play_all_games(tictactoe.board,false)
 	end
 
@@ -82,12 +82,12 @@ describe RecursiveComputer do
 
 
 		temp_board = Array.new
-		for i in (0...9)
+		for i in (0...board.length)
 			temp_board[i] = board[i]
 		end
 		if (!over)
 		if turn
-			for i in (0...9)
+			for i in (0...board.length)
 				if temp_board[i] == nil
 					temp_board[i] = 'X'
 					play_all_games(temp_board,!turn)
@@ -109,11 +109,7 @@ describe RecursiveComputer do
 	end
 
 
-	def possible_wins
 
-		possible_wins = Array.new
-		possible_wins = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6] ]
-	end
 
 	def tie?(board)
 		count = 0
@@ -123,7 +119,7 @@ describe RecursiveComputer do
 			end
 		end
 		if (player_victory(board) == false && computer_victory(board) == false)
-			if(count == 9)
+			if(count == board.length)
 				return true
 			else
 				return false
@@ -134,23 +130,43 @@ describe RecursiveComputer do
 		end
 	end
 
+ def player_victory(board)
+  	for possible in possible_wins(board)
+      if board.length == 9
+  		  if ((board[possible[0]].eql?(board[possible[1]])) && (board[possible[0]].eql?(board[possible[2]])) && board[possible[0]] != nil && board[possible[0]] == 'X' )
+  			 return true
+        end
+      else
+        if (board[possible[0]].eql?(board[possible[1]]) && board[possible[0]].eql?(board[possible[2]]) && board[possible[0]].eql?(board[possible[3]]) && board[possible[0]] != nil && board[possible[0]] = 'X')
+  	     return true
+        end
+      end
+    end
+  	return false
+  end
 
-	def player_victory(board)
+  def computer_victory(board)
+  	for possible in possible_wins(board)
+      if board.length == 9
+  	   if ((board[possible[0]].eql?(board[possible[1]])) && (board[possible[0]].eql?(board[possible[2]])) && board[possible[0]] != nil && board[possible[0]] == 'O' )
+         return true
+       end
+      else
+        if (board[possible[0]].eql?(board[possible[1]]) && board[possible[0]].eql?(board[possible[2]]) && board[possible[0]].eql?(board[possible[3]]) && board[possible[0]] != nil && board[possible[0]] == 'O')
+         return true
+        end
+      end
+  	end
+  	return false
+  end
 
-		for possible in possible_wins
-			if ((board[possible[0]].eql?(board[possible[1]])) && (board[possible[0]].eql?(board[possible[2]])) && board[possible[0]] != nil && board[possible[0]] == 'X' )
-				return true
-			end
-		end
-		return false
-	end
+  def possible_wins(board)
+  	possible_wins = Array.new
+  	if board.length == 9
+  		possible_wins = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6] ]
+  	elsif board.length == 16
+  		possible_wins = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15], [0, 4, 8, 12], [1, 5, 9, 13], [2, 6, 10, 14], [3, 7, 11, 15], [0, 5, 10, 15], [3, 6, 9, 12]]
+  	end
+  end
 
-	def computer_victory(board)
-		for possible in possible_wins
-			if ((board[possible[0]].eql?(board[possible[1]])) && (board[possible[0]].eql?(board[possible[2]])) && board[possible[0]] != nil && board[possible[0]] == 'O' )
-				return true
-			end
-		end
-		return false
-	end
 end
