@@ -43,6 +43,7 @@ class RecursiveComputer
       	new_board[i] = move_char
       	score = -1 * negamax(new_board, !turn, depth + 1,{},-beta,-a,child_num)
         best[(i).to_s] = score
+        print "a = " + a.to_s + " b = " + b.to_s
         if (a < score && score < b && child_num > 1)
           score = -1 * negamax(new_board, !turn, depth + 1,{},-b,-a,child_num)
           best[(i).to_s] = score
@@ -50,6 +51,7 @@ class RecursiveComputer
         a = [score,a].max
         #best[(i).to_s] = score
         if a>= b
+          break
           return a
         end
       end
