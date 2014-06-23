@@ -7,64 +7,74 @@ class RecursiveComputer
   # rename Turn -> turn
   # prefer to take a tic_tac_toe than a board
   # because the tic_tac_toe can provide abstractions around the things we calculate
-  def Turn(board)
-  	current_turn = false
-  	move =  (tree board, current_turn, 0, {}).to_i + 1
-  	return move
+   def Turn(board)
+    current_turn = false
+    move =  negamax(board, current_turn, 0, {}, (Float::INFINITY * -1),Float::INFINITY,1).to_i + 1
+    return move
   end
 
   private
 
   def num_available_moves(board)
-  	board.size - board.compact.size
+    board.size - board.compact.size
   end
 
-
-
-  def tree(board,turn,empty,best)
-  	move_char = (turn ? 'X' : 'O')
-  	if (computer_victory(board) || player_victory(board))
-  		return -10
-  	elsif num_available_moves(board) == 0
-  		return 0
-  	end
-
-
-
-
-
-  	for i in (0...board.length) do
-  		if (board[i] != nil)
-        # no op
-      else			
-      	new_board = Array.new(board.length,nil)
-      	for j in (0...board.length)
-      		new_board[j] = board[j]
-      	end
-      	new_board[i] = move_char
-      	best[(i).to_s] = (-1 * (tree new_board, !turn, empty + 1,{}))
-      end
+  def negamax(board,turn,depth,best,a,b,child_num)
+    move_char = (turn ? 'X' : 'O')
+    if (computer_victory(board) || player_victory(board))
+      return -10 * (board.size + 1 - depth)
+    elsif num_available_moves(board) == 0
+      return 0
     end
 
+    old_child_num = child_num
+    child_num = 0
+    beta = b
+    (0...board.length).each do |i|
+
+      if (board[i] != nil)
+        # no op
+      else    
+        child_num += 1  
+        new_board = Array.new(board.length,nil)
+        (0...board.length).each do |j|
+          new_board[j] = board[j]
+        end
+        new_board[i] = move_char
+        score = -1 * negamax(new_board, !turn, depth + 1,{},-beta,-a,child_num)
+        best[(i).to_s] = score
+        if (a < score && score < b && old_child_num > 1)
+          score = -1 * negamax(new_board, !turn, depth + 1,{},-b,-a,child_num)
+          best[(i).to_s] = score
+        end
+        a = [score,a].max
+        best[(i).to_s] = a
+        if a>= b
+          break
+        end
+      end
+
+    end
+    b = a + 1
     move = best.max_by { |key,value| value }[0]
     high_score = best.max_by { |key, value| value }[1]
-
-    if  (empty == 0)
-    	return move
+    if  depth == 0
+      return move
     else
-    	return high_score 
+      return a
     end
   end
 
   def player_victory(board)
   	for possible in possible_wins(board)
-      if (size == 9)
+      if board.length == 9
   		  if ((board[possible[0]].eql?(board[possible[1]])) && (board[possible[0]].eql?(board[possible[2]])) && board[possible[0]] != nil && board[possible[0]] == 'X' )
   			 return true
-  		  end
+        end
       else
-        if (@board[possible[0]].eql?(@board[possible[1]]) && @board[possible[0]].eql?(@board[possible[2]]) && @board[possible[0]].eql?(@board[possible[3]]) && @board[possible[0]] != nil && board[possible[0]] = 'X')
+        if (board[possible[0]].eql?(board[possible[1]]) && board[possible[0]].eql?(board[possible[2]]) && board[possible[0]].eql?(board[possible[3]]) && board[possible[0]] != nil && board[possible[0]] = 'X')
   	     return true
+        end
       end
     end
   	return false
@@ -72,12 +82,14 @@ class RecursiveComputer
 
   def computer_victory(board)
   	for possible in possible_wins(board)
-  	 if ((board[possible[0]].eql?(board[possible[1]])) && (board[possible[0]].eql?(board[possible[2]])) && board[possible[0]] != nil && board[possible[0]] == 'O' )
+      if board.length == 9
+  	   if ((board[possible[0]].eql?(board[possible[1]])) && (board[possible[0]].eql?(board[possible[2]])) && board[possible[0]] != nil && board[possible[0]] == 'O' )
+         return true
+       end
+      else
+        if (board[possible[0]].eql?(board[possible[1]]) && board[possible[0]].eql?(board[possible[2]]) && board[possible[0]].eql?(board[possible[3]]) && board[possible[0]] != nil && board[possible[0]] == 'O')
          return true
         end
-      else
-        if (@board[possible[0]].eql?(@board[possible[1]]) && @board[possible[0]].eql?(@board[possible[2]]) && @board[possible[0]].eql?(@board[possible[3]]) && @board[possible[0]] != nil && board[possible[0]] = 'O')
-         return true
       end
   	end
   	return false
