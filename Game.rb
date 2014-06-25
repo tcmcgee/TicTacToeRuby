@@ -3,33 +3,35 @@ require_relative "Computer"
 class Game
 	attr_reader :tictactoe
 
-	def initialize(tictactoe, computer)
+	def initialize(tictactoe, computer,input,output)
 		@tictactoe = tictactoe
+		@input = input
+		@output = output
 		@computer = computer
 		@turn = false
 	end
 
 	def start
 		again = true
-		print instructions
-		gets
+		@output.print instructions
+		@input.gets
 		while (again == true)
 			@tictactoe.reset
 			pick_first
 			play
-			print display_board
-			print winner
+			@output.print display_board
+			@output.print winner
 			again = play_again?
 		end
 	end
 
 	def play_again?
-		print "\n Would you like to play again?\n 1. Yes \n 2. No \n"
-		choice = gets.chomp.to_i
+		@output.print "\n Would you like to play again?\n 1. Yes \n 2. No \n"
+		choice = @input.gets.chomp.to_i
 		return true  if choice == 1
 		return false if choice == 2
 		if choice != 1 || choice != 2 
-			print "Please enter a valid input (1 or 2) \n"
+			@output.print "Please enter a valid @input (1 or 2) \n"
 		end
 		play_again?
 	end
@@ -66,10 +68,10 @@ class Game
 	def pick_first
 		done = false
 		while (!done)
-			print "\nWho will go first?"
-			print "\n1. Player\n"
-			print "2. Computer\n"
-			choice = gets.to_i
+			@output.print "\nWho will go first?"
+			@output.print "\n1. Player\n"
+			@output.print "2. Computer\n"
+			choice = @input.gets.to_i
 
 			if choice == 1
 				done = true
@@ -78,7 +80,7 @@ class Game
 				done = true
 				self.turn = false
 			else
-				print "Please enter a valid input! (1 or 2) \n"
+				@output.print "Please enter a valid @input! (1 or 2) \n"
 			end
 		end
 	end
@@ -92,7 +94,7 @@ class Game
 			player_move
 		else
 			if @tictactoe.get_board.compact.length < 2
-				print "Thinking... Please Wait!"
+				@output.print "Thinking... Please Wait!"
 			end
 			@tictactoe.move(@computer.Turn(@tictactoe.board), false)
 		end
@@ -110,18 +112,18 @@ class Game
 	def player_move
 		valid = false
 		while (!valid)
-			print display_board
-			print "\nWhere would you like to move?\n"
-			move = gets.chomp.to_i
+			@output.print display_board
+			@output.print "\nWhere would you like to move?\n"
+			move = @input.gets.chomp.to_i
 			if @tictactoe.board[move - 1] == nil && move < size + 1 && move > 0
 				valid = true
 				@tictactoe.move(move,true)
 			elsif move == 0
-				print help
-				gets
+				@output.print help
+				@input.gets
 
 			else
-				print "Please enter a valid input, or enter 0 for help!"
+				@output.print "Please enter a valid @input, or enter 0 for help!"
 			end
 		end
 	end

@@ -47,6 +47,6 @@ while (!valid)
 end
 
 tictactoe = TicTacToe.new(size)
-game = Game.new(tictactoe,computer)
+game = Game.new(tictactoe,computer,$stdin,$stdout)
 
 game.start
