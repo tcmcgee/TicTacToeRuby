@@ -9,24 +9,46 @@ class RecursiveComputer
   # prefer to take a tic_tac_toe than a board
   # because the tic_tac_toe can provide abstractions around the things we calculate
    def Turn(board)
+
+    if (num_available_moves(board) > 11)
+      return random_move(board)
+    elsif (num_available_moves(board) > 8)
+      print "Thinking... Please Wait!"
+    end
+      
     current_turn = false
-    move =  negamax(board, current_turn, 0, {}, (Float::INFINITY * -1),Float::INFINITY,1).to_i + 1
+    move =  negamax(board, current_turn, 0, {}, (Float::INFINITY * -1),Float::INFINITY,1,board.length - num_available_moves(board)).to_i + 1
     return move
   end
 
   private
 
+  def random_move(board)
+    random = rand(board.length)
+    while (board[random] != nil)
+        print "stuck"
+        random = rand(board.length)
+    end
+    return random
+  end
+
+
   def num_available_moves(board)
     board.size - board.compact.size
   end
 
-  def negamax(board,turn,depth,best,a,b,child_num)
+  def negamax(board,turn,depth,best,a,b,child_num,start_level)
     move_char = (turn ? 'X' : 'O')
     if (computer_victory(board) || player_victory(board))
       return -10 * (board.size + 1 - depth)
     elsif num_available_moves(board) == 0
       return 0
     end
+
+    if depth > start_level + 5 && start_level < 5
+      return 0
+    end
+
 
     old_child_num = child_num
     child_num = 0
@@ -36,18 +58,15 @@ class RecursiveComputer
       if (board[i] != nil)
         # no op
       else  
-        if (board.length - num_available_moves(board) > board.length / 2 )
-          return 0 
-        end
         child_num += 1  
         new_board = Array.new(board.length,nil)
         (0...board.length).each do |j|
           new_board[j] = board[j]
         end
         new_board[i] = move_char
-        score = -1 * negamax(new_board, !turn, depth + 1,{},-beta,-a,child_num).to_i
+        score = -1 * negamax(new_board, !turn, depth + 1,{},-beta,-a,child_num,start_level).to_i
         if (a < score && score < b && old_child_num != 1)
-          score = -1 * negamax(new_board, !turn, depth + 1,{},-b,-a,child_num).to_i
+          score = -1 * negamax(new_board, !turn, depth + 1,{},-b,-a,child_num,start_level).to_i
         end
         a = [score,a].max
         b = a + 1
