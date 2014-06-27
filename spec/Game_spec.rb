@@ -4,7 +4,9 @@ require_relative "../TicTacToe"
 require_relative "../Computer"
 
 describe Game do
-	let (:game) {Game.new(TicTacToe.new(9),Computer.new)}
+	input = $stdin
+	output = $stdout
+	let (:game) {Game.new(TicTacToe.new(9),Computer.new,input,output)}
 
 
 	it "can display a welcome message" do

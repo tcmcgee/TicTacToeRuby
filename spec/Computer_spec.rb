@@ -1,6 +1,6 @@
 
 require_relative "../TicTacToe"
-require_relative "./Computer"
+require_relative "../Computer"
 
 
 
