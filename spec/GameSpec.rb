@@ -1,7 +1,7 @@
-require "rspec"
-require_relative "Game"
-require_relative "TicTacToe"
-require_relative "Computer"
+
+require_relative "../Game"
+require_relative "../TicTacToe"
+require_relative "../Computer"
 
 describe Game do
 	let (:game) {Game.new(TicTacToe.new(9),Computer.new)}

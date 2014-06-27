@@ -1,4 +1,4 @@
-require "rspec"
+
 require_relative "../RecursiveComputer"
 require_relative "../TicTacToe"
 require_relative "../Game"
