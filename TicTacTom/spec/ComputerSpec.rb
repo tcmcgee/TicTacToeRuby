@@ -1,6 +1,6 @@
-require "rspec"
-require_relative "TicTacToe"
-require_relative "Computer"
+#require "rspec"
+require "TicTacToe"
+require "Computer"
 
 
 

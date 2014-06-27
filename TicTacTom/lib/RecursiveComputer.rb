@@ -45,6 +45,10 @@ class RecursiveComputer
       return 0
     end
 
+    if depth > start_level + 5 && start_level < 5
+      return 0
+    end
+
 
     old_child_num = child_num
     child_num = 0
@@ -60,7 +64,6 @@ class RecursiveComputer
           new_board[j] = board[j]
         end
         new_board[i] = move_char
-        
         score = -1 * negamax(new_board, !turn, depth + 1,{},-beta,-a,child_num,start_level).to_i
         if (a < score && score < b && old_child_num != 1)
           score = -1 * negamax(new_board, !turn, depth + 1,{},-b,-a,child_num,start_level).to_i
@@ -79,7 +82,7 @@ class RecursiveComputer
     if  depth == 0
       return move
     else
-      return high_score
+      return a
     end
   end
 

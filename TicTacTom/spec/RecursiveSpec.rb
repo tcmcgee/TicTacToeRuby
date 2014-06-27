@@ -1,7 +1,7 @@
 require "rspec"
-require_relative "RecursiveComputer"
-require_relative "TicTacToe"
-require_relative "Game"
+require "RecursiveComputer"
+require "TicTacToe"
+require "Game"
 
 describe RecursiveComputer do
 	let (:computer) {RecursiveComputer.new}
