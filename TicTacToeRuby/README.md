@@ -1,6 +1,6 @@
 # TicTacToeRuby
 
-TODO: Write a gem description
+A TicTacToe Engine written in ruby.
 
 ## Installation
 
@@ -18,11 +18,11 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Run 'ruby main.rb' or change the input and output in main.rb
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/TicTacToeRuby/fork )
+1. Fork it ( https://github.com/tcmcgee/TicTacToeRuby/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
