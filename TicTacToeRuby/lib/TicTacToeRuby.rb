@@ -1,5 +1,9 @@
-require "TicTacToeRuby/version"
+
 
 module TicTacToeRuby
-  # Your code goes here...
+require "TicTacToeRuby/version"
+require "TicTacToeRuby/Recursive_computer"
+require "TicTacToeRuby/Computer"
+require "TicTacToeRuby/Game"
+require "TicTacToeRuby/TicTacToe"
 end

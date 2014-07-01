@@ -3,7 +3,7 @@ require_relative "../Recursive_computer"
 require_relative "../TicTacToe"
 require_relative "../Game"
 
-describe RecursiveComputer do
+describe Recursive_computer do
 	let (:computer) {Recursive_computer.new}
 
 
