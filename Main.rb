@@ -1,7 +1,7 @@
 require_relative "TicTacToe"
 require_relative "Computer"
 require_relative "Game"
-require_relative "RecursiveComputer"
+require_relative "Recursive_computer"
 
 input = $stdin
 output = $stdout
@@ -41,7 +41,7 @@ while (!valid)
 		computer = Computer.new
   	elsif choice == 2
 		valid = true
-		computer = RecursiveComputer.new
+		computer = Recursive_computer.new
 	else
 		output.print "Please enter a valid input! (1 or 2)\n"
 	end

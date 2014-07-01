@@ -1,10 +1,10 @@
 
-require_relative "../RecursiveComputer"
+require_relative "../Recursive_computer"
 require_relative "../TicTacToe"
 require_relative "../Game"
 
 describe RecursiveComputer do
-	let (:computer) {RecursiveComputer.new}
+	let (:computer) {Recursive_computer.new}
 
 
 	#it "takes the middle given an empty board" do

@@ -1,4 +1,4 @@
-class RecursiveComputer
+class Recursive_computer
 	#1,9,8,3,6
 	def initialize
     @depth = 0
