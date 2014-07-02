@@ -58,28 +58,20 @@ describe Recursive_computer do
 		tictactoe = TicTacToe.new(9)
 		play_all_games(tictactoe.board,false)
 	end
-
-
-
-
 	def play_all_games(board,turn)
 		over = false
 		playermoves = []
 		if (player_victory(board))
 			raise_exception_beatable
-
 			puts board
-
 			over = true
 		end
 		if (computer_victory(board))
 			over = true
-
 		end
 		if (tie?(board))
 			over = true
 		end
-
 
 		temp_board = Array.new
 		for i in (0...board.length)
@@ -100,16 +92,12 @@ describe Recursive_computer do
 			play_all_games(temp_board,!turn,)
 		end
 		end
-
 	end
 
 	def raise_exception_beatable
 		raise "This game is beatable!"
 		print board
 	end
-
-
-
 
 	def tie?(board)
 		count = 0
