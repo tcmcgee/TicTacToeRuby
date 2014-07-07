@@ -5,7 +5,6 @@ require_relative "Recursive_computer"
 
 input = $stdin
 output = $stdout
-
 output.print "Please pick your board size!!\n"
 
 output.print "1. 3x3\n"

@@ -12,7 +12,7 @@ class Recursive_computer
     end
     
     current_turn = false
-    move =  negamax(board, current_turn, 0, {}, (Float::INFINITY * -1),Float::INFINITY,1,board.length - num_available_moves(board)).to_i + 1
+    move =  negamax(board, current_turn, 0, {}).to_i + 1
     return move
   end
 
@@ -21,7 +21,7 @@ class Recursive_computer
   def random_move(board)
     random = rand(board.length)
     while (board[random] != nil)
-      print "stuck"
+      #print "stuck"
       random = rand(board.length)
     end
     return random
@@ -31,43 +31,28 @@ class Recursive_computer
     board.size - board.compact.size
   end
 
-  def negamax(board,turn,depth,best,a,b,child_num,start_level)
+  def negamax(board,turn,depth,best)
     move_char = (turn ? 'X' : 'O')
     if (computer_victory(board) || player_victory(board))
-      return -10 * (board.size + 1 - depth)
+      print board
+      return -10
     elsif num_available_moves(board) == 0
       return 0
     end
-
-    old_child_num = child_num
-    child_num = 0
-    beta = b
     (0...board.length).each do |i|
 
       if (board[i] != nil)
         # no op
       else  
-        child_num += 1  
-        new_board = Array.new(board.length,nil)
         
+        new_board = Array.new(board.length,nil)
         (0...board.length).each do |j|
           new_board[j] = board[j]
         end
-
         new_board[i] = move_char
-        score = -1 * negamax(new_board, !turn, depth + 1,{},-beta,-a,child_num,start_level).to_i
-        if (a < score && score < b && old_child_num != 1)
-          score = -1 * negamax(new_board, !turn, depth + 1,{},-b,-a,child_num,start_level).to_i
-        end
-        a = [score,a].max
-        b = a + 1
-        best[(i).to_s] = a
-        if a >= b
-          break
-        end
+        best[(i).to_s] = -1 * negamax(new_board, !turn, depth + 1,{}).to_i
       end
     end
-    
     move = best.max_by { |key,value| value }[0]
     high_score = best.max_by { |key, value| value }[1]
     if  depth == 0
@@ -78,14 +63,14 @@ class Recursive_computer
   end
 
   def player_victory(board)
-  	for possible in possible_wins(board)
-      if board.length == 9
-        if ((board[possible[0]].eql?(board[possible[1]])) && (board[possible[0]].eql?(board[possible[2]])) && board[possible[0]] != nil && board[possible[0]] == 'X' )
-          return true
+    possible_wins(board).each do |possible|
+      counter = 0
+      (0...(Math.sqrt(board.length).round)).each do |i|
+        if (board[possible[0]]).eql?(board[possible[i]] && board[possible[0]] == 'X' && board[possible[0]] != nil)
+          counter += 1
         end
-      else
-        if (board[possible[0]].eql?(board[possible[1]]) && board[possible[0]].eql?(board[possible[2]]) && board[possible[0]].eql?(board[possible[3]]) && board[possible[0]] != nil && board[possible[0]] = 'X')
-          return true
+        if (counter == (Math.sqrt(board.length).round))
+          #return true
         end
       end
     end
@@ -93,19 +78,20 @@ class Recursive_computer
   end
 
   def computer_victory(board)
-  	for possible in possible_wins(board)
-      if board.length == 9
-        if ((board[possible[0]].eql?(board[possible[1]])) && (board[possible[0]].eql?(board[possible[2]])) && board[possible[0]] != nil && board[possible[0]] == 'O' )
-         return true
-       end
-     else
-      if (board[possible[0]].eql?(board[possible[1]]) && board[possible[0]].eql?(board[possible[2]]) && board[possible[0]].eql?(board[possible[3]]) && board[possible[0]] != nil && board[possible[0]] == 'O')
-       return true
-     end
-   end
- end
- return false
-end
+  	possible_wins(board).each do |possible|
+      counter = 0
+      (0... possible.length).each do |i|
+        if (board[possible[0]]).eql?(board[possible[i]] && board[possible[0]].eql?('O') && board[possible[0]] != nil)
+          counter += 1
+        end
+        if (counter.equal?(possible.length))
+          print i
+          return true
+        end
+      end
+    end
+    return false
+  end
 
 def possible_wins(board)
  possible_wins = Array.new

@@ -3,7 +3,7 @@ require_relative "Computer"
 class Game
 	attr_reader :tictactoe
 
-	def initialize(tictactoe, computer,input,output)
+	def initialize(tictactoe, computer,input,output) #REPLACE Input,output with UI
 		@tictactoe = tictactoe
 		@input = input
 		@output = output
@@ -93,9 +93,6 @@ class Game
 		if turn
 			player_move
 		else
-			if @tictactoe.get_board.compact.length < 2
-				@output.print "Thinking... Please Wait!"
-			end
 			@tictactoe.move(@computer.Turn(@tictactoe.board), false)
 		end
 		self.turn = !turn
@@ -123,7 +120,7 @@ class Game
 				@input.gets
 
 			else
-				@output.print "Please enter a valid @input, or enter 0 for help!"
+				@output.print "Please enter a valid input, or enter 0 for help!"
 			end
 		end
 	end
