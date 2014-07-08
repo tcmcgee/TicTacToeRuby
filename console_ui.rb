@@ -1,14 +1,13 @@
 class Console_ui
-	attr_reader :size
-
+	@@size = 0
 	def initalize
-		@size = get_board_size
+		@@size = 9#get_board_size
 	end
 
 	def size
-		@size
+		@@size
 	end
-	
+
 	def get_board_size
 
 		print "Please pick your board size!!\n"
@@ -63,7 +62,7 @@ class Console_ui
 	end
 
 	def get_player_move()
-		size = @size
+		size = @@size
 		valid = false
 		while (!valid)
 			print print_board
@@ -82,7 +81,7 @@ class Console_ui
 	end
 
 	def print_instructions
-		size = @size
+		size = @@size
 		return_string = "Welcome to Tic Tac Toe!\nWhen playing please reference the board as follows.\n"
 		example_board = Array.new
 		(0... example_board.length).each do |i|
@@ -112,7 +111,7 @@ class Console_ui
 	end
 
 	def print_help
-		size = @size
+		size = @@size
 		
 		example_board = Array.new(size,nil)
 		(0... size).each do |i|
@@ -136,8 +135,7 @@ def print_winner
 	end
 end
 
-def print_board(tictactoe=@tictactoe)
-	
+def print_board(tictactoe=TicTacToe.new(9))
 	return_string = ""
 	string_board = Array.new
 	counter = 0
@@ -145,7 +143,7 @@ def print_board(tictactoe=@tictactoe)
 	tictactoe.board.each{|tile|
 		index = index + 1
 		if (tile == nil)
-			if @size == 16
+			if @@size == 16
 				if index < 10
 					tile =  " " + index.to_s + " "
 				else
@@ -162,10 +160,12 @@ def print_board(tictactoe=@tictactoe)
 		counter = counter + 1}
 		counter2 = 0
 		return_string = ""
-		per_row = Math.sqrt(size)
-		(0...per_row).each  do |i|
+		if @@size != nil
+			per_row = Math.sqrt(@@size)
+		end
+		(0...per_row.to_i).each  do |i|
 			return_string = return_string + "\n"
-			(0...per_row).each do |j|
+			(0...per_row.to_i).each do |j|
 				if j != per_row - 1
 					return_string += string_board[counter2] + "|" 
 				else

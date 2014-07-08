@@ -2,16 +2,17 @@
 class TicTacToe
 	attr_reader :board
 
-	def initialize(size = 3)
-		print size
-		@board  = Array.new(size)
-		@turn   = true
+	def initialize(size = 9)
 		@size = size
+		@board  = Array.new
+		populate_empty_board(size)
+		@turn   = true
+		
 	end
 
-	def populate_empty_board
+	def populate_empty_board(size)
 		print @size
-		(0 ... @size).each do |i|
+		(0...@size.to_i).each do |i|
 			@board[i] = nil
 		end
 	end
@@ -21,7 +22,7 @@ class TicTacToe
 	end
 
 	def set_board(new_board)
-		(0...@size).each do |i|
+		(0...@size.to_i).each do |i|
 			@board[i] = new_board[i]
 		end
 	end
