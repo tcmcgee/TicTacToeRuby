@@ -50,7 +50,7 @@ while (!valid)
 end
 
 ui = Console_ui.new
-tictactoe = TicTacToe.new(ui.get_board_size)
+tictactoe = TicTacToe.new(ui.size)
 game = Game.new(tictactoe,computer,ui)
 
 game.start
