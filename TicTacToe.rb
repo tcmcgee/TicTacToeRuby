@@ -2,8 +2,8 @@
 class TicTacToe
 	attr_reader :board
 
-	def initialize(size)
-		@board  = Array.new(size,nil)
+	def initialize(size = 3)
+		@board  = Array.new(nil,size)
 		@turn   = true
 		@size = size
 	end
