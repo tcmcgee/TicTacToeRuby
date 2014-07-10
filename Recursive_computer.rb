@@ -7,10 +7,7 @@ class Recursive_computer
   def Turn(board)
     if (num_available_moves(board) > 11)
       return random_move(board)
-    elsif (num_available_moves(board) > 8)
-      print "Thinking... Please Wait!"
     end
-    
     current_turn = false
     move =  negamax(board, current_turn, 0, {}).to_i + 1
     return move
@@ -21,7 +18,6 @@ class Recursive_computer
   def random_move(board)
     random = rand(board.length)
     while (board[random] != nil)
-      #print "stuck"
       random = rand(board.length)
     end
     return random
@@ -60,7 +56,7 @@ class Recursive_computer
       return high_score
     end
   end
-  
+
   def get_winner(board)
     if board.length == 9
       possibilities = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6] ]

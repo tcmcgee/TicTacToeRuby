@@ -23,7 +23,6 @@ class Game
 		end
 	end
 
-	
 	def play
 		take_turn until @tictactoe.over
 	end
@@ -32,6 +31,9 @@ class Game
 		if turn
 			move = @ui.get_player_move(@tictactoe)
 		else
+			if @tictactoe.board.length - @tictactoe.board.compact.length > 7 && @computer.instance_of?(Recursive_computer)
+				@ui.print_thinking_message
+			end
 			@tictactoe.move(@computer.Turn(@tictactoe.board), false)
 		end
 		self.turn = !turn

@@ -95,8 +95,13 @@ class Console_ui
 		return_string = return_string + display_board(ttt) + "\n" + "\n Press Enter to continue.."
 		print return_string
 		enter_to_continue
+		return return_string
 	end
 
+	def print_thinking_message
+		print "Thinking... Please wait!"
+	end
+	
 	def get_difficulty
 		print "Please pick your computers difficulty!\n"
 		print "1. Easy\n"
