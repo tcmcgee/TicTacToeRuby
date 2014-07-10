@@ -7,12 +7,17 @@ require_relative "Console_ui"
 
 ui = Console_ui.new
 size = ui.get_board_size
+if size != 16
 difficulty = ui.get_difficulty
 if difficulty == 1
 	computer = Computer.new
 else
 	computer = Recursive_computer.new
 end
+else
+	computer = Computer.new
+end
+
 
 tictactoe = TicTacToe.new(size)
 game = Game.new(tictactoe,computer,ui)
