@@ -21,7 +21,16 @@ class Console_ui
 				print "Please give valid input! (1 or 2)"
 			end
 		end
+		set_size(size)
 		return size
+	end
+
+	def set_size(size)
+		@size = size
+	end
+
+	def size
+		@size
 	end
 
 	def get_play_again
@@ -30,9 +39,9 @@ class Console_ui
 		return true  if choice == 1
 		return false if choice == 2
 		if choice != 1 || choice != 2 
-			print "Please enter a valid @input (1 or 2) \n"
+			print "Please enter a valid input (1 or 2) \n"
 		end
-		get_play_again?
+		get_play_again
 	end
 
 	def get_first_turn
@@ -45,45 +54,47 @@ class Console_ui
 
 			if choice == 1
 				done = true
-				self.turn = true
+				turn = true
 			elsif choice == 2
 				done = true
-				self.turn = false
+				turn = false
 			else
 				print "Please enter a valid @input! (1 or 2) \n"
 			end
 		end
+		return turn
 	end
 
-	def get_player_move
+	def get_player_move(ttt)
 		valid = false
 		while (!valid)
-			print display_board
+			print_board(ttt)
 			print "\nWhere would you like to move?\n"
 			move = gets.chomp.to_i
-			if @tictactoe.board[move - 1] == nil && move < size + 1 && move > 0
+			if ttt.board[move - 1] == nil && move < size + 1 && move > 0
 				valid = true
-				@tictactoe.move(move,true)
+				ttt.move(move,true)
 			elsif move == 0
-				print help
-				gets
+				print_help
+				enter_to_continue
 			else
 				print "Please enter a valid input, or enter 0 for help!"
 			end
 		end
 	end
 
-	def get_instructions
+	def print_instructions
 		return_string = "Welcome to Tic Tac Toe!\nWhen playing please reference the board as follows.\n"
 		
 		example_board = Array.new(size,nil)
 		(0...size).each do |i|
 			example_board[i] = i + 1
 		end
-		ttt = TicTacToe.new(@tictactoe.size)
+		ttt = TicTacToe.new(size)
 		ttt.set_board example_board
 		return_string = return_string + display_board(ttt) + "\n" + "\n Press Enter to continue.."
-		return return_string
+		print return_string
+		enter_to_continue
 	end
 
 	def get_difficulty
@@ -117,14 +128,66 @@ class Console_ui
 	end
 
 
-	def print_winner
-		if @tictactoe.tie?
+	def print_winner(ttt,turn)
+		print display_board(ttt)
+		if ttt.tie?
 			print("\n Good Game, it's a Tie!")
-		elsif (!@turn)
+		elsif (!turn)
 			print("\nCongratulations, the Player has won!")
-		elsif (@turn)
+		elsif (turn)
 			print("\nSorry, the computer is the victor!")
 		end
+	end
+
+	def enter_to_continue
+		gets
+	end
+	def print_board(ttt)
+		print display_board(ttt)
+	end
+	def display_board(tictactoe=@tictactoe)
+		return_string = ""
+		string_board = Array.new
+		counter = 0
+		index = 0
+		tictactoe.board.each{|tile|
+			index = index + 1
+			if (tile == nil)
+				if size == 16
+					if index < 10
+						tile =  " " + index.to_s + " "
+					else
+						tile =  " " + index.to_s
+					end
+				else
+					tile = " _ "
+				end
+
+			else
+				tile = " " + tile.to_s + " "
+			end
+			string_board[counter] = tile
+			counter = counter + 1}
+			counter2 = 0
+			return_string = ""
+			per_row = Math.sqrt(tictactoe.size)
+			for i in (0...per_row) do
+				return_string = return_string + "\n"
+				for j in (0...per_row) do
+					if j != per_row - 1
+						return_string += string_board[counter2] + "|" 
+					else
+						return_string += string_board[counter2]
+					end
+					counter2 = counter2 + 1
+			end#end inner for
+			if i != per_row - 1
+				return_string = return_string + "\n --------------"
+			else
+				return_string = return_string + "\n"
+			end
+		end#end outer for
+		return return_string
 	end
 
 end

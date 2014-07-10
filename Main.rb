@@ -58,6 +58,6 @@ else
 end
 
 tictactoe = TicTacToe.new(size)
-game = Game.new(tictactoe,computer,input,output)
+game = Game.new(tictactoe,computer,input,output,ui)
 
 game.start
