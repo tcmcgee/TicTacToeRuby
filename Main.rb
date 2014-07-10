@@ -2,13 +2,16 @@ require_relative "TicTacToe"
 require_relative "Computer"
 require_relative "Game"
 require_relative "Recursive_computer"
+require_relative "Console_ui"
 
 input = $stdin
 output = $stdout
+=begin
 output.print "Please pick your board size!!\n"
 
 output.print "1. 3x3\n"
 output.print "2. 4x4\n"
+
 valid2 = false
 size = -1
 
@@ -24,7 +27,8 @@ while (!valid2)
 		output.print "Please give valid input! (1 or 2)"
 	end
 end
-
+=end
+=begin
 output.print "Please pick your computers difficulty!\n"
 output.print "1. Easy\n"
 output.print "2. Hard\n"
@@ -41,6 +45,16 @@ while (!valid)
 	else
 		output.print "Please enter a valid input! (1 or 2)\n"
 	end
+end
+=end
+
+ui = Console_ui.new
+size = ui.get_board_size
+difficulty = ui.get_difficulty
+if difficulty == 1
+	computer = Computer.new
+else
+	computer = Recursive_computer.new
 end
 
 tictactoe = TicTacToe.new(size)

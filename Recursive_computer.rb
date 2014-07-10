@@ -33,8 +33,7 @@ class Recursive_computer
 
   def negamax(board,turn,depth,best)
     move_char = (turn ? 'X' : 'O')
-    if (computer_victory(board) || player_victory(board))
-      print board
+    if (get_winner(board) != nil)
       return -10
     elsif num_available_moves(board) == 0
       return 0
@@ -44,7 +43,7 @@ class Recursive_computer
       if (board[i] != nil)
         # no op
       else  
-        
+
         new_board = Array.new(board.length,nil)
         (0...board.length).each do |j|
           new_board[j] = board[j]
@@ -61,45 +60,35 @@ class Recursive_computer
       return high_score
     end
   end
+  
+  def get_winner(board)
+    if board.length == 9
+      possibilities = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6] ]
+    elsif board.length == 16
+      possibilities = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15], [0, 4, 8, 12], [1, 5, 9, 13], [2, 6, 10, 14], [3, 7, 11, 15], [0, 5, 10, 15], [3, 6, 9, 12]]
+    end
 
-  def player_victory(board)
-    possible_wins(board).each do |possible|
-      counter = 0
-      (0...(Math.sqrt(board.length).round)).each do |i|
-        if (board[possible[0]]).eql?(board[possible[i]] && board[possible[0]] == 'X' && board[possible[0]] != nil)
-          counter += 1
+    for possible in possibilities
+      if board.length == 9
+        if (board[possible[0]].eql?(board[possible[1]]) && board[possible[0]].eql?(board[possible[2]]) && board[possible[0]] != nil  )
+          return (@turn ? 'X' : 'O')
         end
-        if (counter == (Math.sqrt(board.length).round))
-          #return true
+      else
+        if (board[possible[0]].eql?(board[possible[1]]) && board[possible[0]].eql?(board[possible[2]]) && board[possible[0]].eql?(board[possible[3]]) && board[possible[0]] != nil  )
+          return (@turn ? 'X' : 'O')
         end
       end
     end
-    return false
+    return nil
   end
 
-  def computer_victory(board)
-  	possible_wins(board).each do |possible|
-      counter = 0
-      (0... possible.length).each do |i|
-        if (board[possible[0]]).eql?(board[possible[i]] && board[possible[0]].eql?('O') && board[possible[0]] != nil)
-          counter += 1
-        end
-        if (counter.equal?(possible.length))
-          print i
-          return true
-        end
-      end
-    end
-    return false
+  def possible_wins(board)
+   possible_wins = Array.new
+   if board.length == 9
+    possible_wins = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6] ]
+  elsif board.length == 16
+    possible_wins = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15], [0, 4, 8, 12], [1, 5, 9, 13], [2, 6, 10, 14], [3, 7, 11, 15], [0, 5, 10, 15], [3, 6, 9, 12]]
   end
-
-def possible_wins(board)
- possible_wins = Array.new
- if board.length == 9
-  possible_wins = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6] ]
-elsif board.length == 16
-  possible_wins = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15], [0, 4, 8, 12], [1, 5, 9, 13], [2, 6, 10, 14], [3, 7, 11, 15], [0, 5, 10, 15], [3, 6, 9, 12]]
-end
 end
 
 end
