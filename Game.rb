@@ -1,29 +1,27 @@
 require_relative "TicTacToe"
 require_relative "Computer"
 class Game
-
 	attr_reader :tictactoe
 
-	def initialize(tictactoe, computer,ui) #REPLACE Input,output with UI
+	def initialize(tictactoe, computer,input,output) #REPLACE Input,output with UI
 		@tictactoe = tictactoe
-		@ui = ui
-		@input = $stdin
-		@output = $stdout
+		@input = input
+		@output = output
 		@computer = computer
 		@turn = false
 	end
 
 	def start
 		again = true
-		@ui.print_instructions
+		@output.print instructions
 		@input.gets
-		while (@ui.get_play_again)
+		while (again == true)
 			@tictactoe.reset
-			@turn = get_first_turn
+			pick_first
 			play
-			@ui.print_board(@tictactoe)
-			@ui.print_winner
-			again = get_play_again
+			@output.print display_board
+			@output.print winner
+			again = play_again?
 		end
 	end
 
@@ -46,8 +44,8 @@ class Game
 			example_board[i] = i + 1
 		end
 		ttt = TicTacToe.new(@tictactoe.size)
-		ttt.set_board(example_board)
-		return_string = return_string + @ui.print_board(ttt) + "\n" + "\n Press Enter to continue.."
+		ttt.set_board example_board
+		return_string = return_string + display_board(ttt) + "\n" + "\n Press Enter to continue.."
 		return return_string
 	end
 
@@ -60,7 +58,7 @@ class Game
 		ttt = TicTacToe.new(example_board.length)
 		ttt.set_board example_board
 		return_string = "Please reference the board as follows.\n"
-		return_string = return_string + @ui.print_board(ttt) + "\n" + "\n Press Enter to continue.."
+		return_string = return_string + display_board(ttt) + "\n" + "\n Press Enter to continue.."
 		return return_string
 	end
 	def size
@@ -93,7 +91,7 @@ class Game
 
 	def take_turn
 		if turn
-			get_player_move(size)
+			player_move
 		else
 			@tictactoe.move(@computer.Turn(@tictactoe.board), false)
 		end
@@ -111,7 +109,7 @@ class Game
 	def player_move
 		valid = false
 		while (!valid)
-			@output.print @ui.print_board
+			@output.print display_board
 			@output.print "\nWhere would you like to move?\n"
 			move = @input.gets.chomp.to_i
 			if @tictactoe.board[move - 1] == nil && move < size + 1 && move > 0
@@ -135,6 +133,55 @@ class Game
 		elsif (@turn)
 			"\nSorry, the computer is the victor!"
 		end
+	end
+
+	def display_board(tictactoe=@tictactoe)
+		return_string = ""
+		string_board = Array.new
+		counter = 0
+		index = 0
+		tictactoe.board.each{|tile|
+			index = index + 1
+			if (tile == nil)
+				if size == 16
+					if index < 10
+						tile =  " " + index.to_s + " "
+					else
+						tile =  " " + index.to_s
+					end
+				else
+					tile = " _ "
+				end
+
+			else
+				tile = " " + tile.to_s + " "
+			end
+			string_board[counter] = tile
+			counter = counter + 1}
+			counter2 = 0
+			return_string = ""
+			per_row = Math.sqrt(@tictactoe.size)
+			for i in (0...per_row) do
+				return_string = return_string + "\n"
+				for j in (0...per_row) do
+					if j != per_row - 1
+						return_string += string_board[counter2] + "|" 
+					else
+						return_string += string_board[counter2]
+					end
+					counter2 = counter2 + 1
+			end#end inner for
+			if i != per_row - 1
+				return_string = return_string + "\n --------------"
+			else
+				return_string = return_string + "\n"
+			end
+		end#end outer for
+
+		
+		#return_string = "\n" + string_board[0] + "|" + string_board[1] + "|" + string_board[2] + "\n" + "-----------" + "\n" + string_board[3] + "|" + string_board[4] + "|" + string_board[5] + "\n"  + "-----------" + "\n" + string_board[6] + "|" + string_board[7] + "|" + string_board[8]
+
+		return return_string
 	end
 
 end
