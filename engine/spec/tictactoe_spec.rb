@@ -1,6 +1,6 @@
 
-require_relative "../TicTacToe"
-require_relative "../Computer"
+require "tictactoe"
+require "computer"
 
 
 describe TicTacToe do

@@ -1,8 +1,8 @@
 
-require_relative "../Game"
-require_relative "../TicTacToe"
-require_relative "../Computer"
-require_relative "../Console_ui"
+require "game"
+require "tictactoe"
+require "computer"
+require "console_ui"
 
 
 describe Console_ui do
