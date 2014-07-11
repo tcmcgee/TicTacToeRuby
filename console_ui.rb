@@ -101,7 +101,7 @@ class Console_ui
 	def print_thinking_message
 		print "Thinking... Please wait!"
 	end
-	
+
 	def get_difficulty
 		print "Please pick your computers difficulty!\n"
 		print "1. Easy\n"
@@ -120,9 +120,8 @@ class Console_ui
 	end
 
 	def print_help
-		
 		example_board = Array.new(size,nil)
-		for i in (0...size)
+		(0...size).each do |i|
 			example_board[i] = i + 1
 		end
 		ttt = TicTacToe.new(example_board.length)
@@ -176,22 +175,22 @@ class Console_ui
 			counter2 = 0
 			return_string = ""
 			per_row = Math.sqrt(tictactoe.size)
-			for i in (0...per_row) do
+			(0...per_row).each do |i|
 				return_string = return_string + "\n"
-				for j in (0...per_row) do
+				(0...per_row).each do |j|
 					if j != per_row - 1
 						return_string += string_board[counter2] + "|" 
 					else
 						return_string += string_board[counter2]
 					end
 					counter2 = counter2 + 1
-			end#end inner for
+			end
 			if i != per_row - 1
 				return_string = return_string + "\n --------------"
 			else
 				return_string = return_string + "\n"
 			end
-		end#end outer for
+		end
 		return return_string
 	end
 

@@ -29,15 +29,15 @@ class Computer
 
 	def check_for_two(value,board)
 		row_length = Math.sqrt(board.length)
-		for possible in possible_wins(board)
+		possible_wins(board).each do |possible|
 			counter = 0
-			for i in (0...row_length)
+			(0...row_length).each do |i|
 				if (board[possible[i]] == value)
 					counter = counter + 1
 				end
 			end
 			if (counter == row_length-1)
-				for i in (0...row_length)
+				(0...row_length).each do |i|
 					if (board[possible[i]] == nil)
 						return possible[i] + 1
 					end

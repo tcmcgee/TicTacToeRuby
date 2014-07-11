@@ -18,8 +18,6 @@ else
 	computer = Computer.new
 end
 
-
-tictactoe = TicTacToe.new(size)
-game = Game.new(tictactoe,computer,ui)
+game = Game.new(TicTacToe.new(size),computer,ui)
 
 game.start

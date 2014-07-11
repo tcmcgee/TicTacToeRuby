@@ -13,7 +13,7 @@ class TicTacToe
 	end
 
 	def set_board(new_board)
-		for i in (0...@size)
+		(0...@size).each do |i|
 			@board[i] = new_board[i]
 		end
 	end
@@ -24,7 +24,7 @@ class TicTacToe
 
 	def tie?
 		count = 0
-		for tile in @board
+		@board.each do |tile|
 			if (!tile.eql?(nil))
 				count = count + 1
 			end
@@ -58,7 +58,7 @@ class TicTacToe
 			possibilities = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15], [0, 4, 8, 12], [1, 5, 9, 13], [2, 6, 10, 14], [3, 7, 11, 15], [0, 5, 10, 15], [3, 6, 9, 12]]
 		end
 
-		for possible in possibilities
+		possibilities.each do |possible|
 			if size == 9
 				if (@board[possible[0]].eql?(@board[possible[1]]) && @board[possible[0]].eql?(@board[possible[2]]) && @board[possible[0]] != nil  )
 					return (@turn ? 'X' : 'O')
@@ -77,7 +77,7 @@ class TicTacToe
 	end
 
 	def reset
-		for i in (0...size)
+		(0...size).each do |i|
 			@board[i] = nil
 		end
 	end
