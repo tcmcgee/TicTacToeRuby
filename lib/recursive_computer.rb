@@ -4,8 +4,8 @@ class Recursive_computer
     @depth = 0
   end
 
-  def Turn(board)
-    @@possible = possible_wins(board)
+  def turn(board)
+    @@possible = possible_wins(board.length)
     if (num_available_moves(board) > 11)
       return random_move(board)
     end
@@ -13,8 +13,6 @@ class Recursive_computer
     move =  negamax(board, current_turn, 0, {}).to_i + 1
     return move
   end
-
-  private
 
   def random_move(board)
     random = rand(board.length)
@@ -39,7 +37,7 @@ class Recursive_computer
 
       if (board[i] != nil)
         # no op
-      else  
+      else
 
         new_board = Array.new(board.length,nil)
         (0...board.length).each do |j|
@@ -61,7 +59,7 @@ class Recursive_computer
   def get_winner(board,turn,wins = possible_wins(board))
     per_row = Math.sqrt(board.length)
     wins.each do |possible|
-      counter = 0 
+      counter = 0
       (0...per_row).each do |index|
         if (board[possible[index]] == board[possible[0]] && board[possible[0]] != nil)
           counter = counter + 1
@@ -74,10 +72,10 @@ class Recursive_computer
     return nil
   end
 
-  def possible_wins(board)
-    per_row = Math.sqrt(board.length)
+  def possible_wins(board_length)
+    per_row = Math.sqrt(board_length)
     possible = []
-    (0...board.length).each do |i|
+    (0...board_length).each do |i|
       possible.push(i)
     end
     vertical = []
@@ -91,7 +89,7 @@ class Recursive_computer
       possible.push(vertical)
     end
     diag = []
-    if ((board.length % 2) == 1)
+    if ((board_length % 2) == 1)
       diag = []
       row = 0
       (0...per_row).each do |column|
