@@ -58,16 +58,16 @@ class Recursive_computer
   end
 
   def get_winner(board,turn)
-
+    per_row = Math.sqrt(board.length)
     possible_wins(board).each do |possible|
-      if board.length == 9
-        if (board[possible[0]].eql?(board[possible[1]]) && board[possible[0]].eql?(board[possible[2]]) && board[possible[0]] != nil  )
-          return (turn ? 'X' : 'O')
+      counter = 0 
+      (0...per_row).each do |index|
+        if (board[possible[index]] == board[possible[0]] && board[possible[0]] != nil)
+          counter = counter + 1
         end
-      else
-        if (board[possible[0]].eql?(board[possible[1]]) && board[possible[0]].eql?(board[possible[2]]) && board[possible[0]].eql?(board[possible[3]]) && board[possible[0]] != nil  )
-          return (turn ? 'X' : 'O')
-        end
+      end
+      if (counter == per_row)
+        return (turn ? 'X' : 'O')
       end
     end
     return nil
