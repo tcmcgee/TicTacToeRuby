@@ -9,7 +9,7 @@ describe Console_ui do
 	let (:ui) {Console_ui.new}
 
 
-	it "can display a welcome message" do
+	it "can display a welcome message", :speed => 'slow' do
 		ui.stub(:size).and_return(9)
 		expect(ui.print_instructions).to eq( "Welcome to Tic Tac Toe!\nWhen playing please reference the board as follows.\n\n 1 | 2 | 3 \n --------------\n 4 | 5 | 6 \n --------------\n 7 | 8 | 9 \n\n\n Press Enter to continue..")
 	end

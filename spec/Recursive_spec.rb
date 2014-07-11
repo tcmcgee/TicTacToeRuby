@@ -49,12 +49,12 @@ describe Recursive_computer do
 		expect(computer.Turn(board)).to eq(3)
 	end
 
-	it "Never loses a game when the player goes first", t:true do
+	it "Never loses a game when the player goes first", t:true, :speed => 'slow'do
 		tictactoe = TicTacToe.new(9)
 		play_all_games(tictactoe.board,true)
 	end
 
-	it "Never loses a game when the computer goes first" do
+	it "Never loses a game when the computer goes first", :speed => 'slow' do
 		tictactoe = TicTacToe.new(9)
 		play_all_games(tictactoe.board,false)
 	end
