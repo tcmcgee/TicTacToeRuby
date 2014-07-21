@@ -47,33 +47,6 @@ class Computer
 		return -1
 	end
 
-	def middle(board)
-		if (board[4] == nil)
-			return 5
-		else
-			return -1
-		end
-	end
-
-	def random_corner(board)
-		choice = "O"
-		possible = Array.new
-		possible = [1,3,7,9]
-
-		while (choice != nil && possible.length != 0)
-			num = rand(possible.length)
-			choice = board[possible[num] - 1]
-			if (choice == nil)
-				return possible[num]
-			else
-				possible.delete_at(num)
-			end
-		end
-		if (possible.length == 0)
-			return -1
-		end
-	end
-
 	def random_move(board)
 		choice = "O"
 		while (choice != nil)

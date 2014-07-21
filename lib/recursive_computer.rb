@@ -72,14 +72,26 @@ class Recursive_computer
     return nil
   end
 
+  def get_horizontal_wins(board_length)
+      per_row = Math.sqrt(board_length)
+      possible = []
+      (0...board_length).each do |i|
+        possible.push(i)
+      end
+      possible = possible.each_slice(per_row).to_a
+      return possible
+    end
+
+
   def possible_wins(board_length)
     per_row = Math.sqrt(board_length)
     possible = []
     (0...board_length).each do |i|
       possible.push(i)
     end
-    vertical = []
+    
     possible = possible.each_slice(per_row).to_a
+    vertical = []
     (0...per_row).each do |row|
       vertical = []
       (0...per_row).each do |index|

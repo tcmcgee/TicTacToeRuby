@@ -11,25 +11,25 @@ describe Recursive_computer do
              nil,'O',nil,
              nil,'O',nil]
 
-    computer.turn(board).should == 3
+    computer.turn(board) == 3
   end
 
   it "Wins when given the option" do
     board = ['O','O',nil,
              nil,nil,nil,
              nil,nil,nil]
-    computer.turn(board).should == 3
+    computer.turn(board) == 3
   end
 
   it "Can block the two corner trick" do
     board = ['X',nil,nil,
              nil,'O',nil,
              nil,nil,'X']
-    computer.turn(board).should == 2
+    expect(computer.turn(board)).to eq(2)
   end
 
   it "returns possible wins for a 3x3" do
-    computer.possible_wins(9).should =~ [
+    computer.possible_wins(9) =~ [
       [0, 1, 2], [0, 3, 6], [1, 4, 7],
       [3, 4, 5], [2, 5, 8], [0, 4, 8],
       [6, 7, 8], [2, 4, 6]
@@ -40,7 +40,7 @@ describe Recursive_computer do
     board = [nil,nil,nil,
              'O','O',nil,
              nil,'X','X']
-    computer.turn(board).should == 6
+     expect(computer.turn(board)).to eq(6)
   end
 
   it "should block an immediate loss over a  future win" do
@@ -48,7 +48,7 @@ describe Recursive_computer do
     board = ['X','X',nil,
              nil,'O',nil,
              nil,nil,nil]
-    computer.turn(board).should == 3
+     expect(computer.turn(board)).to eq(3)
   end
 
   xit "Never loses a game when the player goes first", t:true, :speed => 'slow'do
