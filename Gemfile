@@ -1,6 +1,7 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'TicTacToeRuby'
-# Specify your gem's dependencies in TicTacToeRuby.gemspec
-gem 'rspec'
-gemspec
+gem "bundler"
+gem 'json', '~> 1.7.7'
+
+group :test do
+  gem "rspec"

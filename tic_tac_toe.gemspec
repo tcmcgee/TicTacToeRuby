@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.name          = "tic_tac_toe"
   s.description   =
   s.authors       = ["Tom McGee"]
-  s.email         = ["tmmcgee13@aol.com"]
+  s.email         = ["tmmcgee13@gmail.com"]
   s.summary       = "TicTacToe Engine written in ruby"
   s.homepage      = ""
   s.license       = "MIT"

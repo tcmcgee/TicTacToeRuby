@@ -5,7 +5,7 @@ class Recursive_computer
   end
 
   def turn(board)
-    @@possible = possible_wins(board.length)
+    @possible ||= possible_wins(board.length)
     if (num_available_moves(board) > 11)
       return random_move(board)
     end
@@ -28,7 +28,7 @@ class Recursive_computer
 
   def negamax(board,turn,depth,best)
     move_char = (turn ? 'X' : 'O')
-    if (get_winner(board,turn,@@possible) != nil)
+    if (get_winner(board,turn,@possible) != nil)
       return -10
     elsif num_available_moves(board) == 0
       return 0
