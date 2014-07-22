@@ -3,7 +3,7 @@ require_relative "Computer"
 class Game
 	attr_reader :tictactoe
 
-	def initialize(tictactoe, computer,ui) #REPLACE Input,output with UI
+	def initialize(tictactoe, computer,ui)
 		@tictactoe = tictactoe
 		@computer = computer
 		@turn = false
