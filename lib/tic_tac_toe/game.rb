@@ -33,10 +33,10 @@ module TicTacToe
       if turn
         move = @ui.get_player_move(@tictactoe)
       else
-        if @tictactoe.board.length - @tictactoe.board.compact.length > 7 && @computer.instance_of?(Recursive_computer)
+        if @tictactoe.tiles.length - @tictactoe.tiles.compact.length > 7 && @computer.instance_of?(Recursive_computer)
           @ui.print_thinking_message
         end
-        @tictactoe.move(@computer.Turn(@tictactoe.board), false)
+        @tictactoe.move(@computer.Turn(@tictactoe.tiles), false)
       end
       self.turn = !turn
     end
