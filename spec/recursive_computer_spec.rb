@@ -11,44 +11,6 @@ module TicTacToe
                nil,'O',nil,
                nil,'O',nil]
 
-<<<<<<< HEAD
-  it "Blocks a player win" do
-    board = ['X','X',nil,
-             nil,'O',nil,
-             nil,'O',nil]
-
-    computer.turn(board) == 3
-  end
-
-  it "Wins when given the option" do
-    board = ['O','O',nil,
-             nil,nil,nil,
-             nil,nil,nil]
-    computer.turn(board) == 3
-  end
-
-  it "Can block the two corner trick" do
-    board = ['X',nil,nil,
-             nil,'O',nil,
-             nil,nil,'X']
-    expect(computer.turn(board)).to eq(2)
-  end
-
-  it "returns possible wins for a 3x3" do
-    computer.possible_wins(9) =~ [
-      [0, 1, 2], [0, 3, 6], [1, 4, 7],
-      [3, 4, 5], [2, 5, 8], [0, 4, 8],
-      [6, 7, 8], [2, 4, 6]
-    ]
-  end
-
-  it "Prefers winning over blocking a player win" do
-    board = [nil,nil,nil,
-             'O','O',nil,
-             nil,'X','X']
-     expect(computer.turn(board)).to eq(6)
-  end
-=======
       computer.turn(board).should == 3
     end
 
@@ -65,7 +27,6 @@ module TicTacToe
                nil,nil,'X']
       computer.turn(board).should == 2
     end
->>>>>>> b48c71e7faa65d21df5fb0b89dd1935786c0e91a
 
     it "returns possible wins for a 3x3" do
       computer.possible_wins(9).should =~ [
@@ -75,20 +36,12 @@ module TicTacToe
       ]
     end
 
-<<<<<<< HEAD
-    board = ['X','X',nil,
-             nil,'O',nil,
-             nil,nil,nil]
-     expect(computer.turn(board)).to eq(3)
-  end
-=======
     it "Prefers winning over blocking a player win" do
       board = [nil,nil,nil,
                'O','O',nil,
                nil,'X','X']
       computer.turn(board).should == 6
     end
->>>>>>> b48c71e7faa65d21df5fb0b89dd1935786c0e91a
 
     it "should block an immediate loss over a  future win" do
 
