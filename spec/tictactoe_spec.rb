@@ -1,4 +1,4 @@
-require "tic_tac_toe/tictactoe"
+require "tic_tac_toe/board"
 require "tic_tac_toe/computer"
 
 module TicTacToe

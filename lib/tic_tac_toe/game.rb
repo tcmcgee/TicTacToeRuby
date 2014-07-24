@@ -1,6 +1,3 @@
-require_relative "TicTacToe"
-require_relative "Computer"
-
 module TicTacToe
   class Game
     attr_reader :tictactoe
