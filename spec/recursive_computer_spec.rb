@@ -31,14 +31,6 @@ describe Recursive_computer do
     expect(computer.turn(board)).to eq(2)
   end
 
-  it "returns possible wins for a 3x3" do
-    computer.possible_wins(9) =~ [
-      [0, 1, 2], [0, 3, 6], [1, 4, 7],
-      [3, 4, 5], [2, 5, 8], [0, 4, 8],
-      [6, 7, 8], [2, 4, 6]
-    ]
-  end
-
   it "Prefers winning over blocking a player win" do
     board = [nil,nil,nil,
              'O','O',nil,
@@ -73,30 +65,6 @@ describe Recursive_computer do
              nil,'O',nil,
              'X','O',nil]
     expect(computer.num_available_moves(board)).to eq(3)
-  end
-  it "can get the winner of the game" do
-        board = ['O','X','X',
-                'O','O','X',
-                'X','O','X']
-        expect(computer.get_winner(board,true,computer.possible_wins(board.length))).to eq('X')
-  end
-  it "returns nil if the game has no winner" do
-        board = ['O','X','O',
-                'O','O','X',
-                'X','O','X']
-        expect(computer.get_winner(board,true,computer.possible_wins(board.length))).to eq(nil)
-  end
-
-    it "can get the horizontal victory for any sized board" do
-    computer.get_horizontal_wins(9) =~ [[0,1,2],[3,4,5],[6,7,8]] 
-  end
-
-  it "can get the vertical victory for any sized board" do
-    computer.get_vertical_wins([[0,1,2],[3,4,5],[6,7,8]],9) =~ [[0,3,6],[1,4,7],[2,5,8]] 
-  end
-
-  it "can get the diagonal victory for any sized board" do
-    computer.get_diagonal_wins([[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8]],9) =~ [[0,4,8],[2,4,6]] 
   end
 
   xit "Never loses a game when the player goes first", t:true, :speed => 'slow'do
