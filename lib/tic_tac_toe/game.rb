@@ -36,6 +36,7 @@ module TicTacToe
     def take_turn
       if @turn
         move = @ui.get_player_move(@board)
+        @board.move(move,@turn)
       else
         if  @board.tiles.length -  @board.tiles.compact.length > 7 && @computer.instance_of?(Recursive_computer)
           @ui.print_thinking_message
