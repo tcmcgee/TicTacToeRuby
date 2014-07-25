@@ -73,7 +73,6 @@ module TicTacToe
     (0...board_length).each do |i|
       possible.push(i)
     end
-
     possible = possible.each_slice(per_row).to_a
   end
 
@@ -117,15 +116,14 @@ module TicTacToe
   end
 
   def possible_wins(board_length)
-    possible = []
-    possible = possible + get_horizontal_wins(board_length)
+    possible = get_horizontal_wins(board_length)
     possible = possible + get_vertical_wins(possible,board_length)
     possible = possible.to_a + get_diagonal_wins(possible,board_length)
     return possible
   end
 
     def victory?
-      !!get_winner(@tiles,@turn,possible_wins(@tiles.length))
+      !!get_winner
     end
 
     def reset
