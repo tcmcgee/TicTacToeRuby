@@ -117,7 +117,6 @@ module TicTacToe
   end
 
   def possible_wins(board_length)
-    print (board_length)
     possible = []
     possible = possible + get_horizontal_wins(board_length)
     possible = possible + get_vertical_wins(possible,board_length)
