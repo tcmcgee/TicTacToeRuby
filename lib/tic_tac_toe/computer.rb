@@ -6,7 +6,7 @@ module TicTacToe
       @move = -1
     end
 
-    def Turn(board)
+    def turn(board)
       win = check_for_two('O',board)
       block = (check_for_two('X',board))
       if (win != -1)

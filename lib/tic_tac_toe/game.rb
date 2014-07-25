@@ -33,7 +33,7 @@ module TicTacToe
         if @tictactoe.tiles.length - @tictactoe.tiles.compact.length > 7 && @computer.instance_of?(Recursive_computer)
           @ui.print_thinking_message
         end
-        @tictactoe.move(@computer.Turn(@tictactoe.tiles), false)
+        @tictactoe.move(@computer.turn(@tictactoe.tiles), false)
       end
       self.turn = !turn
     end
