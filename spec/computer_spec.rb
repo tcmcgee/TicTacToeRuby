@@ -3,14 +3,14 @@ require "tic_tac_toe/computer"
 
 module TicTacToe
   describe Computer do
-    let (:game) {TicTacToe.new(9)}
+    let (:game) {Board.new(9)}
     let (:computer) {Computer.new}
     let (:default_board) {Array.new(9,nil)}
 
 
     it "can make a return a random  unoccupied move on the board" do
       board = ['X',nil,'O',nil,'O',nil,'X',nil,'']
-      expect(computer.Turn(board)).to be_within(4).of(5)
+      expect(computer.turn(board)).to be_within(4).of(5)
     end
 
     it "can return the move to win them the game" do
@@ -47,7 +47,7 @@ module TicTacToe
       board = ['X',nil,'O',
                nil,nil,nil,
                'O',nil,'X']
-      expect(computer.Turn(board)).to eq(5)
+      expect(computer.turn(board)).to eq(5)
     end
 
   end

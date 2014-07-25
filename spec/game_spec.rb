@@ -18,5 +18,13 @@ describe Game do
 		expect(game.turn).to eq(!turn)
 	end
 
+	xit "can make a move" do
+		game.turn= true
+		game.stub(:move).and_return(1)
+		game.stub(:@ui).and_return(nil)
+		game.take_turn
+		expect(game.board.tiles[0]).to eq('X')
+	end
+
 end
 end

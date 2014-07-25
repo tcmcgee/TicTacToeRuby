@@ -5,7 +5,7 @@ module TicTacToe
     def initialize(size)
       @tiles  = Array.new(size,nil)
       @turn   = true
-      @size = size
+      @size   = size
     end
 
     def size
@@ -113,17 +113,20 @@ module TicTacToe
       end
       possible.push(diag)
     end
+    return diag
   end
 
   def possible_wins(board_length)
-    possible = get_horizontal_wins(board_length)
+    print (board_length)
+    possible = []
+    possible = possible + get_horizontal_wins(board_length)
     possible = possible + get_vertical_wins(possible,board_length)
-    possible = possible + get_diagonal_wins(possible,board_length)
+    possible = possible.to_a + get_diagonal_wins(possible,board_length)
     return possible
   end
 
     def victory?
-      !!get_winner
+      !!get_winner(@tiles,@turn,possible_wins(@tiles.length))
     end
 
     def reset
