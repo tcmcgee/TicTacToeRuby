@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'TicTacToeRuby'
+gem 'tic_tac_toe'
 # Specify your gem's dependencies in TicTacToeRuby.gemspec
 gem 'rspec'
 gemspec
