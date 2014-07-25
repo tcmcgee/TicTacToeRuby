@@ -1,8 +1,9 @@
 module TicTacToe
   class Game
     attr_reader :board
+    attr_accessor :turn
 
-    def initialize(board, computer,ui) #REPLACE Input,output with UI
+    def initialize(board, computer, ui) #REPLACE Input,output with UI
       @board = board
       @computer = computer
       @turn = false
@@ -14,7 +15,7 @@ module TicTacToe
       @ui.print_instructions
       while (again == true)
         @board.reset
-        self.turn = @ui.get_first_turn
+        @turn = @ui.get_first_turn
         play
         @ui.display_board(@board)
         @ui.print_winner(@board,@turn)
@@ -23,11 +24,11 @@ module TicTacToe
     end
 
     def play
-      take_turn until  @board.over
+      take_turn until @board.over
     end
 
     def take_turn
-      if turn
+      if @turn
         move = @ui.get_player_move(@board)
       else
         if  @board.tiles.length -  @board.tiles.compact.length > 7 && @computer.instance_of?(Recursive_computer)
@@ -35,15 +36,7 @@ module TicTacToe
         end
          @board.move(@computer.turn(@board.tiles), false)
       end
-      self.turn = !turn
-    end
-
-    def turn
-      @turn
-    end
-
-    def turn=(turn)
-      @turn = turn
+      @turn = !@turn
     end
   end
 end
