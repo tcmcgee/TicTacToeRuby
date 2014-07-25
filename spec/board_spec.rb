@@ -6,13 +6,13 @@ module TicTacToe
     let (:board) {Board.new(9)}
 
     it "has a board" do
-      expect(board.tiles).to eq(Array.new(9,nil))
+      board.tiles.should == Array.new(9,nil)
     end
 
     it "can make a move" do
       board.move(3,true)
 
-      expect(board.tiles[2]).to eq('X')
+      board.tiles[2].should == 'X'
     end
 
     it "can check for victory" do
@@ -22,7 +22,7 @@ module TicTacToe
 
       board.set_tiles(tiles)
 
-      expect(board.victory?).to eq(true)
+      board.victory?.should == true
     end
 
     it "can check for a tie" do
@@ -32,7 +32,7 @@ module TicTacToe
 
       board.set_tiles(tiles)
 
-      expect(board.tie?).to eq(true)
+      board.tie?.should == true
     end
 
 
@@ -44,7 +44,7 @@ module TicTacToe
       board.set_tiles(tiles)
       board.reset
 
-      expect(board.tiles[0]).to eq(nil)
+      board.tiles[0].should be_nil
     end
 
 
@@ -55,7 +55,7 @@ module TicTacToe
 
       board.set_tiles(tiles)
 
-      expect(board.over).to eq(true)
+      board.over.should == true
     end
 
 
@@ -66,7 +66,7 @@ module TicTacToe
 
       board.set_tiles(tiles)
       board.victory?
-      expect(board.get_winner).to eq('X')
+      board.get_winner.should == 'X'
     end
 
     it "can get the horizontal victory for any sized board" do
@@ -85,13 +85,6 @@ module TicTacToe
     end
 
     describe "diagonal wins" do
-      xit "can get the diagonal victory for any sized board" do
-        tiles = ['X','X','X',
-                 'X','O','O',
-                 'O','X','O']
-        board.get_diagonal_wins([[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8]],tiles.length) =~ [[0,4,8],[2,4,6]]
-      end
-
       it "returns an array of diagonal win combinations for a 3x3 board" do
         board.tiles.length.should == 9
 
@@ -105,12 +98,12 @@ module TicTacToe
       end
     end
 
-    xit "doesn't think the game is over when it isn't" do
+    it "doesn't think the game is over when it isn't" do
       tiles = ['X','X',nil,
                nil,nil,nil,
                'O',nil,nil]
       board.set_tiles(tiles)
-      expect(board.get_winner).to eq(nil)
+      board.get_winner.should be_nil
     end
   end
 end

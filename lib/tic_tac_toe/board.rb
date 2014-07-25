@@ -53,7 +53,6 @@ module TicTacToe
 
     def get_winner
       per_row = Math.sqrt(@tiles.length) #=> 3
-      p possible_wins(@tiles.length)
       possible_wins(@tiles.length).each do |possible|
         counter = 0
         (0...per_row).each do |index|
@@ -106,7 +105,7 @@ module TicTacToe
   def possible_wins(board_length)
     possible = get_horizontal_wins(board_length)
     possible = possible + get_vertical_wins(possible,board_length)
-    possible = possible.to_a + get_diagonal_wins(possible,board_length)
+    possible = possible.to_a + get_diagonal_wins
     return possible
   end
 
