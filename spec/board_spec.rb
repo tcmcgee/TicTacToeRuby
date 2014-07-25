@@ -90,5 +90,14 @@ module TicTacToe
             'O','X','O']
     board.get_diagonal_wins([[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8]],tiles.length) =~ [[0,4,8],[2,4,6]] 
   end
+  
+
+  it "doesn't think the game is over when it isn't" do
+   tiles = ['X','X',nil,
+            nil,nil,nil,
+            'O',nil,nil]
+    expect(board.get_winner(tiles)).to eq(nil)
+
   end
+ end   
 end
