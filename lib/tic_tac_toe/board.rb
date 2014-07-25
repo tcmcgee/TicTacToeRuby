@@ -56,7 +56,7 @@ module TicTacToe
       wins.each do |possible|
         counter = 0
         (0...per_row).each do |index|
-          if (board[possible[index]] == board[possible[0]] && board[possible[0]] != nil)
+          if (board[possible[index]] == board[possible[0]] && board[possible[0]] != nil && board[possible[index]] != 0)
             counter = counter + 1
           end
         end
