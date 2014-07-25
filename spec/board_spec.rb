@@ -68,5 +68,27 @@ module TicTacToe
       board.victory?
       expect(board.get_winner).to eq('X')
     end
+
+  it "can get the horizontal victory for any sized board" do
+   tiles = ['X','X','X',
+            'X','O','O',
+            'O','X','O']
+
+    board.get_horizontal_wins(tiles.length) =~ [[0,1,2],[3,4,5],[6,7,8]] 
+  end
+
+  it "can get the vertical victory for any sized board" do
+   tiles = ['X','X','X',
+            'X','O','O',
+            'O','X','O']
+    board.get_vertical_wins([[0,1,2],[3,4,5],[6,7,8]],tiles.length) =~ [[0,3,6],[1,4,7],[2,5,8]] 
+  end
+
+  it "can get the diagonal victory for any sized board" do
+   tiles = ['X','X','X',
+            'X','O','O',
+            'O','X','O']
+    board.get_diagonal_wins([[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8]],tiles.length) =~ [[0,4,8],[2,4,6]] 
+  end
   end
 end

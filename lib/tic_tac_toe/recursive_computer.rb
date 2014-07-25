@@ -73,43 +73,59 @@ module TicTacToe
       return nil
     end
 
-    def possible_wins(board_length)
-      per_row = Math.sqrt(board_length)
-      possible = []
-      (0...board_length).each do |i|
-        possible.push(i)
-      end
-      vertical = []
-      possible = possible.each_slice(per_row).to_a
-      (0...per_row).each do |row|
-        vertical = []
-        (0...per_row).each do |index|
-          row_array = possible[index]
-          vertical.push(row_array[row])
-        end
-        possible.push(vertical)
-      end
-      diag = []
-      if ((board_length % 2) == 1)
-        diag = []
-        row = 0
-        (0...per_row).each do |column|
-          row_array = possible[column]
-          diag.push(row_array[row])
-          row = row + 1
-        end
-        possible.push(diag)
-        diag = []
-        row = per_row - 1
-        (0...per_row).each do |column|
-          row_array = possible[column]
-          diag.push(row_array[row])
-          row = row - 1
-        end
-        possible.push(diag)
-      end
-      return possible
+     def get_horizontal_wins(board_length)
+    per_row = Math.sqrt(board_length)
+    possible = []
+    (0...board_length).each do |i|
+      possible.push(i)
     end
 
+    possible = possible.each_slice(per_row).to_a
   end
+
+  def get_vertical_wins(horizontal,board_length)
+    vertical = []
+    possible = []
+    per_row = Math.sqrt(board_length)
+    (0...per_row).each do |row|
+      vertical = []
+      (0...per_row).each do |index|
+        row_array = horizontal[index]
+        vertical.push(row_array[row])
+      end
+      possible.push(vertical)
+    end
+    return possible
+  end
+
+  def get_diagonal_wins(possible,board_length)
+    per_row = Math.sqrt(board_length)
+    diag = []
+    if ((board_length % 2) == 1)
+      diag = []
+      row = 0
+      (0...per_row).each do |column|
+        row_array = possible[column]
+        diag.push(row_array[row])
+        row = row + 1
+      end
+      possible.push(diag)
+      diag = []
+      row = per_row - 1
+      (0...per_row).each do |column|
+        row_array = possible[column]
+        diag.push(row_array[row])
+        row = row - 1
+      end
+      possible.push(diag)
+    end
+  end
+
+  def possible_wins(board_length)
+    possible = get_horizontal_wins(board_length)
+    possible = possible + get_vertical_wins(possible,board_length)
+    possible = possible + get_diagonal_wins(possible,board_length)
+    return possible
+  end
+end
 end
