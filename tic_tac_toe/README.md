@@ -1,6 +1,6 @@
 # TicTacToe
 
-TODO: Write a gem description
+A TicTacToe Engine written in ruby.
 
 ## Installation
 
