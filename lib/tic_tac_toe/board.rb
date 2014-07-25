@@ -51,17 +51,18 @@ module TicTacToe
       @tiles.compact.size == size
     end
 
-    def get_winner(board = @tiles,turn = @turn,wins = possible_wins(@tiles.length))
-      per_row = Math.sqrt(board.length)
-      wins.each do |possible|
+    def get_winner
+      per_row = Math.sqrt(@tiles.length) #=> 3
+      p possible_wins(@tiles.length)
+      possible_wins(@tiles.length).each do |possible|
         counter = 0
         (0...per_row).each do |index|
-          if (board[possible[index]] == board[possible[0]] && board[possible[0]] != nil && board[possible[index]] != nil)
+          if (@tiles[possible[index]] == @tiles[possible[0]] && @tiles[possible[0]] != nil && @tiles[possible[index]] != nil)
             counter = counter + 1
           end
         end
         if (counter == per_row)
-          return (turn ? 'X' : 'O')
+          return (@turn ? 'X' : 'O')
         end
       end
       return nil
@@ -91,28 +92,15 @@ module TicTacToe
     return possible
   end
 
-  def get_diagonal_wins(possible,board_length = @tiles.length)
-    per_row = Math.sqrt(board_length)
-    diag = []
-    if ((board_length % 2) == 1)
-      diag = []
-      row = 0
-      (0...per_row).each do |column|
-        row_array = possible[column]
-        diag.push(row_array[row])
-        row = row + 1
-      end
-      possible.push(diag)
-      diag = []
-      row = per_row - 1
-      (0...per_row).each do |column|
-        row_array = possible[column]
-        diag.push(row_array[row])
-        row = row - 1
-      end
-      possible.push(diag)
-    end
-    return diag
+  def get_diagonal_wins
+    per_row = Math.sqrt(@tiles.length).to_i
+
+    left_diagonal_wins = (0...per_row).reduce([]) {
+      |wins, num| wins.push(4 * num)
+    }
+    right_diagonal_wins = (1...(per_row + 1)).reduce([]) { |wins, num| wins.push(num + num) }
+
+    [].push(left_diagonal_wins, right_diagonal_wins)
   end
 
   def possible_wins(board_length)
