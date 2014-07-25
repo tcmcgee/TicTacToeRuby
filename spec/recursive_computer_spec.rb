@@ -7,35 +7,35 @@ module TicTacToe
       board = ['O','X','X',
                'O','O',nil,
                'X','O','X']
-      expect(computer.turn(board) - 1).to eq(5)
+      (computer.turn(board) - 1).should eq(5)
     end
     it "Blocks a player win" do
       board = ['X','X',nil,
                nil,'O',nil,
                nil,'O',nil]
 
-      expect(computer.turn(board)).to eq(3)
+      computer.turn(board).should eq(3)
     end
 
     it "Wins when given the option" do
       board = ['O','O',nil,
                nil,nil,nil,
                nil,nil,nil]
-      expect(computer.turn(board)).to eq(3)
+      computer.turn(board).should eq(3)
     end
 
     it "Can block the two corner trick" do
       board = ['X',nil,nil,
                nil,'O',nil,
                nil,nil,'X']
-      expect(computer.turn(board)).to eq(2)
+      computer.turn(board).should eq(2)
     end
 
     it "Prefers winning over blocking a player win" do
       board = [nil,nil,nil,
                'O','O',nil,
                nil,'X','X']
-      expect(computer.turn(board)).to eq(6)
+      computer.turn(board).should eq(6)
     end
 
     it "should block an immediate loss over a  future win" do
@@ -43,28 +43,28 @@ module TicTacToe
       board = ['X','X',nil,
                nil,'O',nil,
                nil,nil,nil]
-      expect(computer.turn(board)).to eq(3)
+      computer.turn(board).should eq(3)
     end
 
     it "returns an availible move" do
       board = ['O','X','X',
                'O','O',nil,
                'X','O','X']
-      expect(computer.turn(board)).to eq(6)
+      computer.turn(board).should eq(6)
     end
 
     it "can return a random move" do
       board = ['O','X','X',
                'O','O',nil,
                'X','O','X']
-      expect(computer.turn(board)).to eq(6)
+      computer.turn(board).should eq(6)
     end
 
     it "can return thea number of availible moves" do
       board = ['O','X','X',
                nil,'O',nil,
                'X','O',nil]
-      expect(computer.num_available_moves(board)).to eq(3)
+      computer.num_available_moves(board).should eq(3)
     end
   end
 end

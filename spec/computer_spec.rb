@@ -10,7 +10,7 @@ module TicTacToe
 
     it "can make a return a random  unoccupied move on the board" do
       board = ['X',nil,'O',nil,'O',nil,'X',nil,'']
-      expect(computer.turn(board)).to be_within(4).of(5)
+     computer.turn(board).should be_within(4).of(5)
     end
 
     it "can return the move to win them the game" do
@@ -18,25 +18,25 @@ module TicTacToe
       board = ['O','O',nil,
                nil,nil,nil,
                nil,nil,nil]
-      expect(computer.check_for_two('O',board)).to eq(3)
+     computer.check_for_two('O',board).should eq(3)
     end
 
     it "can return the move to block the player" do
       board = ['X','X',nil,
                nil,nil,nil,
                nil,nil,nil]
-      expect(computer.check_for_two('X',board)).to eq(3)
+     computer.check_for_two('X',board).should eq(3)
     end
 
     it "can return a random unoccupied corner space" do
-      expect(computer.random_corner(default_board)).to satisfy {| i| i == 1 || i == 3|| i == 7 || i == 9}
+     computer.random_corner(default_board).should satisfy {| i| i == 1 || i == 3|| i == 7 || i == 9}
     end
 
     it "retuns -1 if there is no corner availible" do
       board = ['X',nil,'O',
                nil,nil,nil,
                'O',nil,'X']
-      expect(computer.random_corner(board)).to eq(-1)
+     computer.random_corner(board).should eq(-1)
     end
 
     it "checks to see if the middle is availible and returns it's index if it is" do
@@ -47,7 +47,7 @@ module TicTacToe
       board = ['X',nil,'O',
                nil,nil,nil,
                'O',nil,'X']
-      expect(computer.turn(board)).to eq(5)
+     computer.turn(board).should eq(5)
     end
 
   end
