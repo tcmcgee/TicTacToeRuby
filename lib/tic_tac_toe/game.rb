@@ -20,7 +20,7 @@ module TicTacToe
       
       while (again == true)
         @board.reset
-        @turn = @ui.
+        @turn = @ui.get_first_turn
         @ui.print_instructions
         play
         @ui.display_board(@board)
