@@ -17,9 +17,10 @@ module TicTacToe
     end
 
     def set_tiles(new_tiles)
-      (0...@size).each do |i|
+      (0...new_tiles.length).each do |i|
         @tiles[i] = new_tiles[i]
       end
+      @size = new_tiles.length
     end
 
     def move(index, turn)
@@ -56,7 +57,7 @@ module TicTacToe
     end
 
     def get_winner
-      per_row = Math.sqrt(@tiles.length) #=> 3
+      per_row = Math.sqrt(size) #=> 3
       possible_wins(@tiles.length).each do |possible|
         counter = 0
         (0...per_row).each do |index|
