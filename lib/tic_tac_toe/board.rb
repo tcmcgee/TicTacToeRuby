@@ -8,6 +8,10 @@ module TicTacToe
       @size   = size
     end
 
+    def turn=(turn)
+      @turn = turn
+    end
+
     def size
       @size
     end
