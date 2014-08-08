@@ -17,14 +17,47 @@ module TicTacToe
         return random_move(board)
       end
     end
-    def possible_wins(board)
-      possible_wins = Array.new
-      if board.length == 9
-        possible_wins = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6] ]
-      elsif board.length == 16
-        possible_wins = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15], [0, 4, 8, 12], [1, 5, 9, 13], [2, 6, 10, 14], [3, 7, 11, 15], [0, 5, 10, 15], [3, 6, 9, 12]]
-      end
+    def get_horizontal_wins(board_length = @tiles.length)
+    per_row = Math.sqrt(board_length)
+    possible = []
+    (0...board_length).each do |i|
+      possible.push(i)
     end
+    possible = possible.each_slice(per_row).to_a
+  end
+
+  def get_vertical_wins(horizontal,board_length = @tiles.length)
+    vertical = []
+    possible = []
+    per_row = Math.sqrt(board_length)
+    (0...per_row).each do |row|
+      vertical = []
+      (0...per_row).each do |index|
+        row_array = horizontal[index]
+        vertical.push(row_array[row])
+      end
+      possible.push(vertical)
+    end
+    return possible
+  end
+
+  def get_diagonal_wins
+    per_row = Math.sqrt(@tiles.length).to_i
+
+    left_diagonal_wins = (0...per_row).reduce([]) {
+      |wins, num| wins.push(4 * num)
+    }
+    right_diagonal_wins = (1...(per_row + 1)).reduce([]) { |wins, num| wins.push(num + num) }
+
+    [].push(left_diagonal_wins, right_diagonal_wins)
+  end
+
+  def possible_wins(board_length)
+    possible = get_horizontal_wins(board_length)
+    possible = possible + get_vertical_wins(possible,board_length)
+    possible = possible.to_a + get_diagonal_wins
+    return possible
+  end
 
     def check_for_two(value,board)
       row_length = Math.sqrt(board.length)
