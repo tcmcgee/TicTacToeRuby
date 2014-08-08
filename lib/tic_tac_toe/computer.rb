@@ -41,8 +41,8 @@ module TicTacToe
     return possible
   end
 
-  def get_diagonal_wins
-    per_row = Math.sqrt(@tiles.length).to_i
+  def get_diagonal_wins(tiles)
+    per_row = Math.sqrt(tiles.length).to_i
 
     left_diagonal_wins = (0...per_row).reduce([]) {
       |wins, num| wins.push(4 * num)
@@ -56,7 +56,7 @@ module TicTacToe
     board_length = board.length
     possible = get_horizontal_wins(board_length)
     possible = possible + get_vertical_wins(possible,board_length)
-    possible = possible.to_a + get_diagonal_wins
+    possible = possible.to_a + get_diagonal_wins(board)
     return possible
   end
 
