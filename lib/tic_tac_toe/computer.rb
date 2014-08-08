@@ -53,7 +53,7 @@ module TicTacToe
   end
 
   def possible_wins(board)
-    board_length = board.tiles.length
+    board_length = board.length
     possible = get_horizontal_wins(board_length)
     possible = possible + get_vertical_wins(possible,board_length)
     possible = possible.to_a + get_diagonal_wins
