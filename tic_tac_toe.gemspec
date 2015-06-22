@@ -1,7 +1,6 @@
 Gem::Specification.new do |s|
   s.version       = '0.1.0'
   s.name          = "tic_tac_toe"
-  s.description   = ""
   s.authors       = ["Tom McGee"]
   s.email         = ["tmmcgee13@aol.com"]
   s.summary       = "TicTacToe Engine written in ruby"
