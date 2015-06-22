@@ -1,4 +1,4 @@
-require './lib/tic_tac_toe/game'
-require './lib/tic_tac_toe/computer'
-require './lib/tic_tac_toe/recursive_computer'
-require './lib/tic_tac_toe/board'
+require 'tic_tac_toe/game'
+require 'tic_tac_toe/computer'
+require 'tic_tac_toe/recursive_computer'
+require 'tic_tac_toe/board'
