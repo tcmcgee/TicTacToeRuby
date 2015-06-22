@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.authors       = ["Tom McGee"]
   s.email         = ["tmmcgee13@aol.com"]
   s.summary       = "TicTacToe Engine written in ruby"
-  s.homepage      =
+  #s.homepage      =
 
 
   s.files         += %w(README.md)

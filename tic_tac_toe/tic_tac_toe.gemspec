@@ -1,7 +1,7 @@
 # coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'tic_tac_toe/version'
+#lib = File.expand_path('../lib', __FILE__)
+#$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require './tic_tac_toe/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "tic_tac_toe"
@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["tmmcgee13@aol.com"]
   spec.summary       = "TicTacToe!"
   spec.description   = "TicTacToe!"
-  spec.homepage      = ""
+  #spec.homepage      = ""
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
