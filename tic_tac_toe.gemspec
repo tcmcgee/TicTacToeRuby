@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.email         = ["tmmcgee13@aol.com"]
   s.summary       = "TicTacToe Engine written in ruby"
   s.homepage      =
-  s.license       = "MIT"
+
 
   s.files         += %w(README.md)
   s.files         += Dir.glob("lib/**/*")
