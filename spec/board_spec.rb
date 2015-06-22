@@ -96,6 +96,10 @@ module TicTacToe
 
         board.get_diagonal_wins.should == [[0, 4, 8, 12], [2, 4, 6, 8]]
       end
+      it "returns diagonal wins for a larger board" do
+        board = Board.new(49)
+        board.get_diagonal_wins.should == [[0, 9, 18, 27, 36, 45, 54], [6, 13, 20, 27, 34, 41, 48]]
+      end
     end
 
     it "doesn't think the game is over when it isn't" do
