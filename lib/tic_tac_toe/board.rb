@@ -66,7 +66,7 @@ module TicTacToe
           end
         end
         if (counter == per_row)
-          return (@turn ? 'X' : 'O')
+          return (@tiles[possible[index]])
         end
       end
       return nil
