@@ -60,13 +60,15 @@ module TicTacToe
       per_row = Math.sqrt(size) #=> 3
       possible_wins(@tiles.length).each do |possible|
         counter = 0
+        winner = ''
         (0...per_row).each do |index|
           if (@tiles[possible[index]] == @tiles[possible[0]] && @tiles[possible[0]] != nil && @tiles[possible[index]] != nil)
+            winner = @tiles[possible[0]]
             counter = counter + 1
           end
         end
         if (counter == per_row)
-          return (@tiles[possible[index]])
+          return (winner)
         end
       end
       return nil
