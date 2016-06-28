@@ -1,7 +1,7 @@
-require_relative "TicTacToe"
-require_relative "Computer"
-require_relative "Game"
-require_relative "RecursiveComputer"
+require_relative "./lib/TicTacToe"
+require_relative "./lib/Computer"
+require_relative "./lib/Game"
+require_relative "./lib/RecursiveComputer"
 
 
 =begin

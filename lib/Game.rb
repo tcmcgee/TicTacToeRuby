@@ -132,19 +132,9 @@ class Game
 
 	def display_board(tictactoe=@tictactoe)
 		return_string = ""
-		string_board = Array.new
-		counter = 0
-		tictactoe.board.each{|tile|
-		if (tile == nil)
-		tile = " _ "
-		else
-			tile = " " + tile.to_s + " "
-		end
-		string_board[counter] = tile
-		counter = counter + 1}
+		string_board = tictactoe.get_string_board
 		return_string = "\n" + string_board[0] + "|" + string_board[1] + "|" + string_board[2] + "\n" + "-----------" + "\n" + string_board[3] + "|" + string_board[4] + "|" + string_board[5] + "\n"  + "-----------" + "\n" + string_board[6] + "|" + string_board[7] + "|" + string_board[8]
-
-		return return_string
+		return_string
 	end
 
 end
