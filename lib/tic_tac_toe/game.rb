@@ -5,7 +5,7 @@ module TicTacToe
 
     def initialize(ui) 
       @board = TicTacToe::Board.new(ui.get_board_size)
-      if ui.get_difficulty == 1 || @board.tiles.length == 16
+      if ui.get_difficulty == 1 || @board.tiles.length > 9
         @computer = TicTacToe::Computer.new
       else
         @computer = TicTacToe::Recursive_computer.new
