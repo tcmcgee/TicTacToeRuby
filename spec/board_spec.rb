@@ -22,7 +22,7 @@ module TicTacToe
 
       board.set_tiles(tiles)
 
-      board.victory?.should == true
+      board.has_winner?.should == true
     end
 
     it "can check for a tie" do
@@ -65,7 +65,6 @@ module TicTacToe
                'O','X','O']
 
       board.set_tiles(tiles)
-      board.victory?
       board.get_winner.should == 'X'
     end
 
@@ -74,14 +73,14 @@ module TicTacToe
                'X','O','O',
                'O','X','O']
 
-      board.get_horizontal_wins(tiles.length) =~ [[0,1,2],[3,4,5],[6,7,8]]
+      board.get_horizontal_wins =~ [[0,1,2],[3,4,5],[6,7,8]]
     end
 
     it "can get the vertical victory for any sized board" do
       tiles = ['X','X','X',
                'X','O','O',
                'O','X','O']
-      board.get_vertical_wins([[0,1,2],[3,4,5],[6,7,8]],tiles.length) =~ [[0,3,6],[1,4,7],[2,5,8]]
+      board.get_vertical_wins =~ [[0,3,6],[1,4,7],[2,5,8]]
     end
 
     describe "diagonal wins" do
@@ -93,12 +92,11 @@ module TicTacToe
 
       it "returns an array of diagonal win combinations for a 4x4 board" do
         board = Board.new(16)
-
-        board.get_diagonal_wins.should == [[0, 4, 8, 12], [2, 4, 6, 8]]
+        board.get_diagonal_wins.should == [[0, 5, 10, 15], [3, 6, 9, 12]] 
       end
       it "returns diagonal wins for a larger board" do
         board = Board.new(49)
-        board.get_diagonal_wins.should == [[0, 9, 18, 27, 36, 45, 54], [6, 13, 20, 27, 34, 41, 48]]
+        board.get_diagonal_wins.should == [[0, 8, 16, 24, 32, 40, 48], [6, 12, 18, 24, 30, 36, 42]]
       end
     end
 

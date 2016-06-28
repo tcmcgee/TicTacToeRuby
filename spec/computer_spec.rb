@@ -14,7 +14,6 @@ module TicTacToe
     end
 
     it "can return the move to win them the game" do
-      #board = Array.new
       board = ['O','O',nil,
                nil,nil,nil,
                nil,nil,nil]
@@ -26,21 +25,6 @@ module TicTacToe
                nil,nil,nil,
                nil,nil,nil]
      computer.check_for_two('X',board).should eq(3)
-    end
-
-    it "can return a random unoccupied corner space" do
-     computer.random_corner(default_board).should satisfy {| i| i == 1 || i == 3|| i == 7 || i == 9}
-    end
-
-    it "retuns -1 if there is no corner availible" do
-      board = ['X',nil,'O',
-               nil,nil,nil,
-               'O',nil,'X']
-     computer.random_corner(board).should eq(-1)
-    end
-
-    it "checks to see if the middle is availible and returns it's index if it is" do
-      expect (computer.middle(default_board)) == (5)
     end
 
     it "can go through all its other methods and returns the best move availible" do

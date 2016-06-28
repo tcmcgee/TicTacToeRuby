@@ -35,7 +35,7 @@ module TicTacToe
         end
       end
 
-      if (victory? == false)
+      if (has_winner? == false)
         if(count == size)
           return true
         else
@@ -52,13 +52,13 @@ module TicTacToe
     end
 
     def tie?
-      return false if victory?
+      return false if has_winner?
       @tiles.compact.size == size
     end
 
     def get_winner
-      per_row = Math.sqrt(size) #=> 3
-      possible_wins(@tiles.length).each do |possible|
+      per_row = Math.sqrt(size)
+      possible_wins.each do |possible|
         counter = 0
         winner = ''
         (0...per_row).each do |index|
@@ -74,49 +74,65 @@ module TicTacToe
       return nil
     end
 
-  def get_horizontal_wins(board_length = @tiles.length)
-    per_row = Math.sqrt(board_length)
-    possible = []
-    (0...board_length).each do |i|
-      possible.push(i)
+    def possible_wins 
+      possible_wins = Array.new
+      possible_wins.push(*get_horizontal_wins)
+      possible_wins.push(*get_vertical_wins)
+      possible_wins.push(*get_diagonal_wins)
+      possible_wins
     end
-    possible = possible.each_slice(per_row).to_a
-  end
 
-  def get_vertical_wins(horizontal,board_length = @tiles.length)
-    vertical = []
-    possible = []
-    per_row = Math.sqrt(board_length)
-    (0...per_row).each do |row|
-      vertical = []
-      (0...per_row).each do |index|
-        row_array = horizontal[index]
-        vertical.push(row_array[row])
+    def get_row_length
+      Math.sqrt(tiles.length)
+    end
+
+    def get_horizontal_wins
+      row_length = get_row_length
+      horizontal_wins = Array.new
+      count = 0
+      (0...row_length).each do |row|
+        win = Array.new(row_length)
+        (0...row_length).each do |col|
+          win[col] = count
+          count += 1
+        end
+        horizontal_wins.push(win)
       end
-      possible.push(vertical)
+      horizontal_wins
     end
-    return possible
-  end
 
-  def get_diagonal_wins
-    per_row = Math.sqrt(@tiles.length).to_i
+    def get_vertical_wins
+      row_length = get_row_length
+      vertical_wins = Array.new
+      count = 0
+      (0...row_length).each do |row|
+        win = Array.new(row_length)
+        count = row
+        (0...row_length).each do |col|
+          win[col] = count
+          count += row_length
+        end
+        vertical_wins[row] = win
+      end
+      vertical_wins
+    end
 
-    left_diagonal_wins = (0...per_row).reduce([]) {
-      |wins, num| wins.push(4 * num)
-    }
-    right_diagonal_wins = (1...(per_row + 1)).reduce([]) { |wins, num| wins.push(num + num) }
+    def get_diagonal_wins
+      row_length = get_row_length
+      left_diag = Array.new
+      right_diag = Array.new
+      left = 0
+      right = row_length - 1
+      (0...row_length).each do |row|
+        left_diag.push(left)
+        right_diag.push(right)
+        left += row_length + 1
+        right += row_length - 1
+      end
+      [left_diag, right_diag]
+    end
 
-    [].push(left_diagonal_wins, right_diagonal_wins)
-  end
-
-  def possible_wins(board_length)
-    possible = get_horizontal_wins(board_length)
-    possible = possible + get_vertical_wins(possible,board_length)
-    possible = possible.to_a + get_diagonal_wins
-    return possible
-  end
-
-    def victory?
+    def has_winner?
       !!get_winner
     end
 
@@ -127,7 +143,7 @@ module TicTacToe
     end
 
     def over
-      victory? || tie?
+      has_winner? || tie?
     end
 
   end

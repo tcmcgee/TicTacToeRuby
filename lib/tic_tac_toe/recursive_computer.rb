@@ -2,13 +2,12 @@ require 'tic_tac_toe/board'
 
 module TicTacToe
   class Recursive_computer
-    #1,9,8,3,6
     def initialize
       @depth = 0
     end
 
     def turn(board)
-      if (num_available_moves(board) > 11)
+      if (num_available_moves(board) > 9)
         return random_move(board)
       end
       current_turn = false
@@ -37,12 +36,11 @@ module TicTacToe
       elsif num_available_moves(board.tiles) == 0
         return 0
       end
-      (0...board.tiles.length).each do |i|
 
+      (0...board.tiles.length).each do |i|
         if (board.tiles[i] != nil)
           # no op
         else
-
           new_board = Array.new(board.tiles.length,nil)
           (0...board.tiles.length).each do |j|
             new_board[j] = board.tiles[j]
@@ -51,6 +49,7 @@ module TicTacToe
           best[(i).to_s] = -1 * negamax(new_board, !turn, depth + 1,{}).to_i
         end
       end
+
       move = best.max_by { |key,value| value }[0]
       high_score = best.max_by { |key, value| value }[1]
       if  depth == 0

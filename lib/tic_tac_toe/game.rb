@@ -3,8 +3,7 @@ module TicTacToe
     attr_reader :board
     attr_accessor :turn
 
-    def initialize(ui) #REPLACE Input,output with UI
-      #TicTacToe::Board.new(size),computer,
+    def initialize(ui) 
       @board = TicTacToe::Board.new(ui.get_board_size)
       if ui.get_difficulty == 1 || @board.tiles.length == 16
         @computer = TicTacToe::Computer.new
