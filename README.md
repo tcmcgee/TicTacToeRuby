@@ -10,6 +10,8 @@ To play the game, run Main.rb and follow the instructions.
 
 Rspec tests included, files ending with Spec.rb
 
+To Run tests navigate to base directory and run `rake`
+
 Classes with Descriptions 
 =========================
 
