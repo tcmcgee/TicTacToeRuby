@@ -1,8 +1,7 @@
 TicTacToeRuby
 =============
 
-Tic Tac Toe in Ruby for 8th Light
-
+Tic Tac Toe in Ruby
 
 AI uses a recursive algorithim similar to minimax on hard difficulty and has predetermined behavior on Easy.
 
